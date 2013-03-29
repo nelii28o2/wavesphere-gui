@@ -1,97 +1,101 @@
 package edu.uprm.icom5217.wave.view;
 
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JScrollPane;
-import javax.swing.JButton;
-import javax.swing.Box;
-import java.awt.Insets;
-import javax.swing.JList;
 import java.awt.Dimension;
+
 import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
-import java.awt.Component;
-import java.awt.SystemColor;
-import java.awt.Color;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import javax.swing.UIManager;
+
+import net.miginfocom.swing.MigLayout;
 
 public class LeftPanel extends JPanel {
-	public LeftPanel() {
-		setLayout(new GridLayout(0, 1, 0, 0));
-		
-		panel_1 = new JPanel();
-		panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
-		add(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.PAGE_AXIS));
-		
-			JList<String> spheresList = new JList<String>();
-			spheresList.setBackground(Color.WHITE);
-			spheresList.setPreferredSize(new Dimension(30, 100));
-			spheresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			spheresList.setOpaque(false);
-			spheresList.setModel(new AbstractListModel() {
-				String[] values = new String[] {"Sphere1", "Sphere2", "Sphere3", "Sphere4"};
-				public int getSize() {
-					return values.length;
-				}
-				public Object getElementAt(int index) {
-					return values[index];
-				}
-			});
-			
-			
-			scrollPane = new JScrollPane(spheresList);
-			scrollPane.setPreferredSize(new Dimension(50, 100));
-			scrollPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Local Spheres:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.add(scrollPane);
-			scrollPane.setAlignmentX(Component.LEFT_ALIGNMENT);
-			scrollPane.setMinimumSize(new Dimension(50, 100));
-		
-		panel_2 = new JPanel();
-		add(panel_2);
-		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
-		
-		panel = new JPanel();
-		panel_2.add(panel);
-		
-		
-		btnNewButton = new JButton("Add New Sphere");
-		panel.add(btnNewButton);
-		
-		panel_3 = new JPanel();
-		panel_2.add(panel_3);
-		
-		btnNewButton_1 = new JButton("Download All Data");
-		panel_3.add(btnNewButton_1);
-		
-		panel_4 = new JPanel();
-		panel_2.add(panel_4);
-		
-		btnNewButton_2 = new JButton("Delete All Data");
-		panel_4.add(btnNewButton_2);
-	}
-
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JScrollPane scrollPane;
-	private JPanel panel_1;
-	private JPanel panel;
-	private JPanel panel_2;
-	private JPanel panel_3;
-	private JPanel panel_4;
-  
+	private static final long serialVersionUID = -4124150540994039205L;
+	private JPanel scrollListContainer;
+	private JList<String> spheresList;
 
+	private JButton addSphereButton;
+	private JButton deleteAllButton;
+	private JButton downloadAllButton;
+
+	public LeftPanel() {
+		setLayout(new MigLayout("", "[200px, center]", "[h][][][][][]"));
+		setMinimumSize(new Dimension(200, 50));
+
+		scrollListContainer = new JPanel();
+		scrollListContainer.setBorder(new EmptyBorder(10, 10, 10, 10));
+		scrollListContainer.setLayout(new BoxLayout(scrollListContainer,
+				BoxLayout.Y_AXIS));
+
+		JScrollPane scrollPane = new JScrollPane(getSpheresList());
+		scrollPane.setBorder(new TitledBorder(UIManager
+				.getBorder("TitledBorder.border"), "Local Spheres:",
+				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollListContainer.add(scrollPane);
+
+		add(scrollListContainer, "cell 0 0 1 3, grow, shrink 0");
+		add(getAddSphereButton(), "cell 0 3");
+		add(getDownloadAllButton(), "cell 0 4");
+		add(getDeleteAllButton(), "cell 0 5");
+	}
+
+	private JList<String> getSpheresList() {
+		if (spheresList == null) {
+			spheresList = new JList<String>();
+			spheresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			spheresList.setModel(new AbstractListModel<String>() {// TODO
+																	// extract
+																	// model
+						/**
+				 * 
+				 */
+						private static final long serialVersionUID = 4832944973241303538L;
+
+						String[] values = new String[] { "Sphere1", "Sphere2",
+								"Sphere3", "Sphere4" };
+
+						public int getSize() {
+							return values.length;
+						}
+
+						public String getElementAt(int index) {
+							return values[index];
+						}
+					});
+		}
+
+		return spheresList;
+	}
+
+	private JButton getDeleteAllButton() {
+		if (deleteAllButton == null) {
+			deleteAllButton = new JButton("  Delete All Data  ");
+		}
+
+		return deleteAllButton;
+	}
+
+	private JButton getDownloadAllButton() {
+		if (downloadAllButton == null) {
+			downloadAllButton = new JButton("Download All Data");
+		}
+		return downloadAllButton;
+	}
+
+	private JButton getAddSphereButton() {
+		if (addSphereButton == null) {
+			addSphereButton = new JButton("  Add New Sphere ");
+		}
+
+		return addSphereButton;
+	}
 }

@@ -28,6 +28,8 @@ public class MainWindow extends JFrame{
 		getContentPane().add(scrollPane);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setContinuousLayout(true);
+		splitPane.setEnabled(false);
 		scrollPane.setViewportView(splitPane);
 		
 		JPanel leftPanel = new LeftPanel();

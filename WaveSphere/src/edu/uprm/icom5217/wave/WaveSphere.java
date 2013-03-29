@@ -9,7 +9,6 @@ public class WaveSphere{
 	public static void main(String[] args) {
 		
 		
-		
 	}
 	
 }
