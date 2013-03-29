@@ -28,7 +28,7 @@ public class LeftPanel extends JPanel {
 	private JButton downloadAllButton;
 
 	public LeftPanel() {
-		setLayout(new MigLayout("", "[200px, center]", "[h][][][][][]"));
+		setLayout(new MigLayout("", "[200px, center]", "[100%][][][][][]"));
 		setMinimumSize(new Dimension(200, 50));
 
 		scrollListContainer = new JPanel();
