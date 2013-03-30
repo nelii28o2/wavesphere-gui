@@ -1,17 +1,11 @@
 package edu.uprm.icom5217.wave.view;
 
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 public class MainWindow extends JFrame{
 	

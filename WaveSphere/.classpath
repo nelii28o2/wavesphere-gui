@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
-=======
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_10/lib/comm.jar"/>
-	<classpathentry kind="lib" path="/xbee-api-0.9/lib/RXTXcomm.jar"/>
->>>>>>> branch 'master' of https://github.com/nelii28o2/wavesphere-gui.git
+	<classpathentry kind="lib" path="C:/Users/Nelian/workspace/xbee-api-0.9/lib/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
