@@ -18,15 +18,23 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel lastLocationValueLabel;
 	private JLabel samplesLable;
 	private JSpinner spinner;
+	private JLabel spaceAvailableLabel;
+	private JLabel spaceAvailableValueLabel;
+	private JLabel batteryLevelLabel;
+	private JLabel batteryLevelValueLabel;
 	
 	public SphereInfoPanel() {
-		setLayout(new MigLayout("", "20[grow,leading]15[grow]20", "[][][]"));
-		add(getIdNumberLabel());
-		add(getLdNumberValueLabel(), "wrap");
-		add(getLastLocationLabel());
-		add(getLastLocationValueLabel(), "wrap");
-		add(getSamplesLable());
-		add(getSpinner(), "wrap");
+		setLayout(new MigLayout("", "[grow,leading]15[grow]", "[][][][][]"));
+		add(getIdNumberLabel(), "cell 0 0");
+		add(getLdNumberValueLabel(), "cell 1 0");
+		add(getLastLocationLabel(), "cell 0 1");
+		add(getLastLocationValueLabel(), "cell 1 1");
+		add(getSpaceAvailableLable(), "cell 0 2");
+		add(getSpaceAvailableValueLabel(), "cell 1 2");
+		add(getBatteryLevelLabel(), "cell 0 3");
+		add(getBatteryLevelValueLabel(), "cell 1 3");
+		add(getSamplesLable(), "cell 0 4");
+		add(getSpinner(), "cell 1 4");
 	}
 
 	
@@ -76,5 +84,36 @@ public class SphereInfoPanel extends JPanel {
 			spinner = new JSpinner();
 		}
 		return spinner;
+	}
+	
+	private JLabel getSpaceAvailableLable(){
+		if(spaceAvailableLabel ==null){
+			spaceAvailableLabel = new JLabel("Memory Available: ");
+			spaceAvailableLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		}
+		
+		return spaceAvailableLabel;
+	}
+	private JLabel getSpaceAvailableValueLabel() {
+		if (spaceAvailableValueLabel == null) {
+			spaceAvailableValueLabel = new JLabel("40MB (10%)");
+			spaceAvailableValueLabel.setName("spaceAvailableValueLabel");
+		}
+		return spaceAvailableValueLabel;
+	}
+	private JLabel getBatteryLevelLabel() {
+		if (batteryLevelLabel == null) {
+			batteryLevelLabel = new JLabel("Battery Level:");
+			batteryLevelLabel.setName("batteryLevelLabel");
+			batteryLevelLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		}
+		return batteryLevelLabel;
+	}
+	private JLabel getBatteryLevelValueLabel() {
+		if (batteryLevelValueLabel == null) {
+			batteryLevelValueLabel = new JLabel("20%");
+			batteryLevelValueLabel.setName("batteryLevelValueLabel");
+		}
+		return batteryLevelValueLabel;
 	}
 }

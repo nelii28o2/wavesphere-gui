@@ -18,8 +18,8 @@ public class SamplePanel extends JPanel{
 		add(getSampleStartDateLabel(), "cell 0 0,alignx trailing");
 		add(getJanPmLabel(), "cell 1 0");
 		add(getTable(), "cell 0 1 2 1,grow");
-		add(getDownloadDataButton(), "cell 0 2");
-		add(getDeleteDataButton(), "cell 1 2");
+		add(getDownloadDataButton(), "cell 0 2,alignx center");
+		add(getDeleteDataButton(), "cell 1 2,alignx center");
 	}
 
 	
@@ -47,14 +47,14 @@ public class SamplePanel extends JPanel{
 	}
 	private JButton getDownloadDataButton() {
 		if (downloadDataButton == null) {
-			downloadDataButton = new JButton("Download Data");
+			downloadDataButton = new JButton("Download Sample");
 			downloadDataButton.setName("downloadDataButton");
 		}
 		return downloadDataButton;
 	}
 	private JButton getDeleteDataButton() {
 		if (deleteDataButton == null) {
-			deleteDataButton = new JButton("Delete Data");
+			deleteDataButton = new JButton("Delete Sample");
 			deleteDataButton.setName("deleteDataButton");
 		}
 		return deleteDataButton;
