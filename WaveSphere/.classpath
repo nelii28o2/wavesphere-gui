@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar"/>
-	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.7.0_10/lib/comm.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Nelian/workspace/xbee-api-0.9/lib/RXTXcomm.jar"/>
+	<classpathentry kind="lib" path="lib/RXTXcomm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
