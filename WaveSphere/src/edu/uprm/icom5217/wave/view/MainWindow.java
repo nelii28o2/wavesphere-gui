@@ -15,12 +15,13 @@ public class MainWindow extends JFrame{
 	
 	public MainWindow() {
 		getContentPane().setLayout(new MigLayout("fill", "", ""));
-		getContentPane().add(getSplitPane(), "cell 0 0,growx,aligny top");
+		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
 	}
 
 	private JSplitPane getSplitPane() {
 		if (splitPane == null) {
 			splitPane = new JSplitPane();
+			splitPane.setEnabled(false);
 			splitPane.setAutoscrolls(true);
 			splitPane.setName("splitPane");
 			splitPane.setLeftComponent(new LeftPanel());

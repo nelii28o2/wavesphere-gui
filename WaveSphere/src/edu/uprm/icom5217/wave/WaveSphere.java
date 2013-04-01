@@ -21,7 +21,7 @@ public class WaveSphere{
 			public void run() {
 				window.pack();
 				window.setVisible(true);
-				
+				window.setMinimumSize(window.getSize());
 			}
 		});
 	
