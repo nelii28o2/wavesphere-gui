@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.Component;
 
 public class LeftPanel extends JPanel {
 	/**
@@ -28,15 +29,19 @@ public class LeftPanel extends JPanel {
 	private JButton downloadAllButton;
 
 	public LeftPanel() {
+		setAlignmentY(Component.TOP_ALIGNMENT);
+		setMaximumSize(new Dimension(200, 600));
 		setLayout(new MigLayout("", "[200px, center]", "[100%][][][][][]"));
 		setMinimumSize(new Dimension(200, 50));
 
 		scrollListContainer = new JPanel();
-		scrollListContainer.setBorder(new EmptyBorder(10, 10, 10, 10));
+		scrollListContainer.setAlignmentY(Component.TOP_ALIGNMENT);
+		scrollListContainer.setBorder(new EmptyBorder(10, 15, 10, 15));
 		scrollListContainer.setLayout(new BoxLayout(scrollListContainer,
 				BoxLayout.Y_AXIS));
 
 		JScrollPane scrollPane = new JScrollPane(getSpheresList());
+		scrollPane.setAlignmentY(Component.TOP_ALIGNMENT);
 		scrollPane.setBorder(new TitledBorder(UIManager
 				.getBorder("TitledBorder.border"), "Local Spheres:",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -51,6 +56,7 @@ public class LeftPanel extends JPanel {
 	private JList<String> getSpheresList() {
 		if (spheresList == null) {
 			spheresList = new JList<String>();
+			spheresList.setAlignmentY(Component.TOP_ALIGNMENT);
 			spheresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			spheresList.setModel(new AbstractListModel<String>() {// TODO
 																	// extract
