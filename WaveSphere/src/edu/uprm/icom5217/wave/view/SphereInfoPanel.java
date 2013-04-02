@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JSpinner;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JComboBox;
 
 public class SphereInfoPanel extends JPanel {
 	
@@ -17,11 +18,11 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel lastLocationLabel;
 	private JLabel lastLocationValueLabel;
 	private JLabel samplesLable;
-	private JSpinner spinner;
 	private JLabel spaceAvailableLabel;
 	private JLabel spaceAvailableValueLabel;
 	private JLabel batteryLevelLabel;
 	private JLabel batteryLevelValueLabel;
+	private JComboBox comboBox;
 	
 	public SphereInfoPanel() {
 		setLayout(new MigLayout("", "[grow,leading]15[grow]", "[][][][][]"));
@@ -33,8 +34,8 @@ public class SphereInfoPanel extends JPanel {
 		add(getSpaceAvailableValueLabel(), "cell 1 2");
 		add(getBatteryLevelLabel(), "cell 0 3");
 		add(getBatteryLevelValueLabel(), "cell 1 3");
-		add(getSamplesLable(), "cell 0 4");
-		add(getSpinner(), "cell 1 4");
+		add(getSamplesLable(), "cell 0 4,alignx leading");
+		add(getComboBox(), "cell 1 4");
 	}
 
 	
@@ -79,12 +80,6 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return samplesLable;
 	}
-	private JSpinner getSpinner() {
-		if (spinner == null) {
-			spinner = new JSpinner();
-		}
-		return spinner;
-	}
 	
 	private JLabel getSpaceAvailableLable(){
 		if(spaceAvailableLabel ==null){
@@ -115,5 +110,12 @@ public class SphereInfoPanel extends JPanel {
 			batteryLevelValueLabel.setName("batteryLevelValueLabel");
 		}
 		return batteryLevelValueLabel;
+	}
+	private JComboBox getComboBox() {
+		if (comboBox == null) {
+			comboBox = new JComboBox();
+			comboBox.setName("comboBox");
+		}
+		return comboBox;
 	}
 }

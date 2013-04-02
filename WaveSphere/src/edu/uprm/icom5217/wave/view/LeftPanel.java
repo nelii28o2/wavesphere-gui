@@ -42,9 +42,7 @@ public class LeftPanel extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane(getSpheresList());
 		scrollPane.setAlignmentY(Component.TOP_ALIGNMENT);
-		scrollPane.setBorder(new TitledBorder(UIManager
-				.getBorder("TitledBorder.border"), "Local Spheres:",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollPane.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Local Spheres:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		scrollListContainer.add(scrollPane);
 
 		add(scrollListContainer, "cell 0 0 1 3, grow, shrink 0");
