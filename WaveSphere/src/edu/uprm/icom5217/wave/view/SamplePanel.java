@@ -10,6 +10,7 @@ import javax.swing.border.TitledBorder;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
@@ -17,7 +18,6 @@ public class SamplePanel extends JPanel{
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
 		add(getSampleStartDateLabel(), "cell 0 0,alignx trailing");
 		add(getJanPmLabel(), "cell 1 0");
-		add(getTable(), "cell 0 1 2 1,grow");
 		add(getDownloadDataButton(), "cell 0 2,alignx center");
 		add(getDeleteDataButton(), "cell 1 2,alignx center");
 	}
@@ -28,7 +28,6 @@ public class SamplePanel extends JPanel{
 	private JLabel janPmLabel;
 	private JButton downloadDataButton;
 	private JButton deleteDataButton;
-	private JTable table;
 
 	
 	private JLabel getSampleStartDateLabel() {
@@ -58,12 +57,5 @@ public class SamplePanel extends JPanel{
 			deleteDataButton.setName("deleteDataButton");
 		}
 		return deleteDataButton;
-	}
-	private JTable getTable() {
-		if (table == null) {
-			table = new JTable();
-			table.setName("table");
-		}
-		return table;
 	}
 }

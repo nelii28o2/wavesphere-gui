@@ -2,6 +2,7 @@ package edu.uprm.icom5217.wave;
 
 import java.awt.EventQueue;
 
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -20,7 +21,7 @@ public class WaveSphere{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//might make it look better on Mac
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
-			//failed, then just use default Java one.
+			System.err.println("Could not apply local look and feel. Using default.");
 		}
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -30,6 +31,7 @@ public class WaveSphere{
 				window.pack();
 				window.setVisible(true);
 				window.setMinimumSize(window.getSize());
+				window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			}
 		});
 	

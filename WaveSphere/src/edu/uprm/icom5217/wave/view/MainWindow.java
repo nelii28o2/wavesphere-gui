@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JSplitPane;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.Toolkit;
 
 public class MainWindow extends JFrame{
 	
@@ -14,6 +15,8 @@ public class MainWindow extends JFrame{
 	private JSplitPane splitPane;
 	
 	public MainWindow() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource("/img/wavespherelogo2.png")));
+		setTitle("Wave Sphere");
 		getContentPane().setLayout(new MigLayout("fill", "", ""));
 		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
 	}
