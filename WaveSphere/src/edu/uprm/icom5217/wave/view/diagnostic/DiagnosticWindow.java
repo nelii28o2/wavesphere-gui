@@ -1,36 +1,61 @@
 package edu.uprm.icom5217.wave.view.diagnostic;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 
 public class DiagnosticWindow extends JDialog {
-	private JLabel batteryStatusLabel;
+	
+	private static final long serialVersionUID = -5722644987144387448L;
+	private JLabel batteryLabel;
 	private JLabel memoryLabel;
 	private JLabel locationLabel;
 	private JLabel wirelessLabel;
-	private JLabel newLabelLabel;
-	private JLabel angleLabel;
+	private JLabel accelerationLabel;
+	private JLabel gyroLabel;
 	private JLabel magenticLabel;
+	private JButton stopButton;
+	private JLabel batteryValueLabel;
+	private JLabel memoryValueLabel;
+	private JLabel locationValueLabel;
+	private JLabel wirelssValueLabel;
+	private JLabel accelerationValueLabel;
+	private JLabel gyroValueLabel;
+	private JLabel magneticValueLabel;
 	
 	public DiagnosticWindow() {
+		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		setResizable(false);
 		setTitle("Diagnosis Of Sphere 1");
-		getContentPane().setLayout(new MigLayout("", "20[fill]20[fill]20", "[][][][][][][]"));
-		getContentPane().add(getBatteryStatusLabel(), "cell 0 0");
-		getContentPane().add(getMemoryLabel(), "cell 0 1");
-		getContentPane().add(getLocationLabel(), "cell 0 2");
-		getContentPane().add(getWirelessLabel(), "cell 0 3");
-		getContentPane().add(getNewLabelLabel(), "cell 0 4");
-		getContentPane().add(getAngleLabel(), "cell 0 5");
-		getContentPane().add(getMagenticLabel(), "cell 0 6");
+		getContentPane().setLayout(new MigLayout("", "[46.00][156.00,grow][118.00][46.00]", "[][][][][][][][][][]"));
+		getContentPane().add(getBatteryLabel(), "cell 1 0");
+		getContentPane().add(getBatteryValueLabel(), "cell 2 0");
+		getContentPane().add(getMemoryLabel(), "cell 1 1");
+		getContentPane().add(getMemoryValueLabel(), "cell 2 1");
+		getContentPane().add(getLocationLabel(), "cell 1 2");
+		getContentPane().add(getLocationValueLabel(), "cell 2 2");
+		getContentPane().add(getWirelessLabel(), "cell 1 3");
+		getContentPane().add(getWirelssValueLabel(), "cell 2 3");
+		getContentPane().add(getAccelerationLabel(), "cell 1 4");
+		getContentPane().add(getAccelerationValueLabel(), "cell 2 4");
+		getContentPane().add(getGyroLabel(), "cell 1 5");
+		getContentPane().add(getGyroValueLabel(), "cell 2 5");
+		getContentPane().add(getMagenticLabel(), "cell 1 6");
+		getContentPane().add(getMagneticValueLabel(), "cell 2 6");
+		getContentPane().add(getStopButton(), "cell 0 9 4 1,alignx center");
+		pack();
 	}
-	private JLabel getBatteryStatusLabel() {
-		if (batteryStatusLabel == null) {
-			batteryStatusLabel = new JLabel("Battery:");
-			batteryStatusLabel.setName("batteryStatusLabel");
+	private JLabel getBatteryLabel() {
+		if (batteryLabel == null) {
+			batteryLabel = new JLabel("Battery:");
+			batteryLabel.setName("batteryLabel");
 		}
-		return batteryStatusLabel;
+		return batteryLabel;
 	}
 	private JLabel getMemoryLabel() {
 		if (memoryLabel == null) {
@@ -53,19 +78,19 @@ public class DiagnosticWindow extends JDialog {
 		}
 		return wirelessLabel;
 	}
-	private JLabel getNewLabelLabel() {
-		if (newLabelLabel == null) {
-			newLabelLabel = new JLabel("Acceleration:");
-			newLabelLabel.setName("newLabelLabel");
+	private JLabel getAccelerationLabel() {
+		if (accelerationLabel == null) {
+			accelerationLabel = new JLabel("Acceleration:");
+			accelerationLabel.setName("accelerationLabel");
 		}
-		return newLabelLabel;
+		return accelerationLabel;
 	}
-	private JLabel getAngleLabel() {
-		if (angleLabel == null) {
-			angleLabel = new JLabel("Angle:");
-			angleLabel.setName("angleLabel");
+	private JLabel getGyroLabel() {
+		if (gyroLabel == null) {
+			gyroLabel = new JLabel("Angle:");
+			gyroLabel.setName("gyroLabel");
 		}
-		return angleLabel;
+		return gyroLabel;
 	}
 	private JLabel getMagenticLabel() {
 		if (magenticLabel == null) {
@@ -73,5 +98,71 @@ public class DiagnosticWindow extends JDialog {
 			magenticLabel.setName("magenticLabel");
 		}
 		return magenticLabel;
+	}
+	private JLabel getBatteryValueLabel() {
+		if (batteryValueLabel == null) {
+			batteryValueLabel = new JLabel("60%");
+			batteryValueLabel.setName("batteryValueLabel");
+		}
+		return batteryValueLabel;
+	}
+	private JLabel getMemoryValueLabel() {
+		if (memoryValueLabel == null) {
+			memoryValueLabel = new JLabel("30%");
+			memoryValueLabel.setName("memoryValueLabel");
+		}
+		return memoryValueLabel;
+	}
+	private JLabel getLocationValueLabel() {
+		if (locationValueLabel == null) {
+			locationValueLabel = new JLabel("157N 20W");
+			locationValueLabel.setName("locationValueLabel");
+		}
+		return locationValueLabel;
+	}
+	private JLabel getWirelssValueLabel() {
+		if (wirelssValueLabel == null) {
+			wirelssValueLabel = new JLabel("OK");
+			wirelssValueLabel.setName("wirelssValueLabel");
+		}
+		return wirelssValueLabel;
+	}
+	private JLabel getAccelerationValueLabel() {
+		if (accelerationValueLabel == null) {
+			accelerationValueLabel = new JLabel("0 g");
+			accelerationValueLabel.setName("accelerationValueLabel");
+		}
+		return accelerationValueLabel;
+	}
+	private JLabel getGyroValueLabel() {
+		if (gyroValueLabel == null) {
+			gyroValueLabel = new JLabel("0\u00B0");
+			gyroValueLabel.setName("gyroValueLabel");
+		}
+		return gyroValueLabel;
+	}
+	private JLabel getMagneticValueLabel() {
+		if (magneticValueLabel == null) {
+			magneticValueLabel = new JLabel("0");
+			magneticValueLabel.setName("magneticValueLabel");
+		}
+		return magneticValueLabel;
+	}
+	
+	private JButton getStopButton() {
+		if (stopButton == null) {
+			stopButton = new JButton("Stop Diagnosis");
+			stopButton.setName("stopButton");
+			stopButton.addActionListener(new ActionListener(){
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+					
+				}
+				
+			});
+		}
+		return stopButton;
 	}
 }
