@@ -8,25 +8,27 @@ import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
+
 import net.miginfocom.swing.MigLayout;
 import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class RightPanel extends JPanel {
 	private JPanel sphereInfoPanel;
 	private JToggleButton newToggleButtonToggleButton;
-	private JButton newButtonButton;
+	private JButton refreshButton;
 	private JButton enterDiagnosticModeButton;
-	private JPanel samplePanel;
-	private JButton configureSampleButton;
+	private JButton sampleConfigurationButton;
 	public RightPanel() {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Sphere 1", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new MigLayout("", "[41.00][grow][]", "[31.00][101.00,grow][][grow]"));
 		add(getNewToggleButtonToggleButton(), "cell 0 0");
 		add(getEnterDiagnosticModeButton(), "cell 1 0,alignx center");
-		add(getNewButtonButton(), "cell 2 0");
+		add(getRefreshButton(), "cell 2 0");
 		add(getSphereInfoPanel(), "flowx,cell 0 1 3 1,growx,aligny top");
-		add(getConfigureSampleButton(), "cell 1 2,alignx center");
-		add(getPanel_1(), "cell 1 3,grow");
+		add(getSampleConfigurationButton(), "cell 1 2,alignx center");
 	}
 	private JPanel getSphereInfoPanel() {
 		if (sphereInfoPanel == null) {
@@ -42,33 +44,32 @@ public class RightPanel extends JPanel {
 		}
 		return newToggleButtonToggleButton;
 	}
-	private JButton getNewButtonButton() {
-		if (newButtonButton == null) {
-			newButtonButton = new JButton("Update Info");
-			newButtonButton.setName("newButtonButton");
+	private JButton getRefreshButton() {
+		if (refreshButton == null) {
+			refreshButton = new JButton("Refresh");
+			refreshButton.setName("refreshButton");
 		}
-		return newButtonButton;
+		return refreshButton;
 	}
 	private JButton getEnterDiagnosticModeButton() {
 		if (enterDiagnosticModeButton == null) {
 			enterDiagnosticModeButton = new JButton("Enter Diagnostic Mode");
+			enterDiagnosticModeButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					DiagnosticWindow.display("");
+				}
+			});
 			enterDiagnosticModeButton.setName("enterDiagnosticModeButton");
 		}
 		return enterDiagnosticModeButton;
 	}
-	private JPanel getPanel_1() {
-		if (samplePanel == null) {
-			samplePanel = new SamplePanel();
-			samplePanel.setName("panel_1");
+	private JButton getSampleConfigurationButton() {
+		if (sampleConfigurationButton == null) {
+			sampleConfigurationButton = new JButton("Manage Samples");
+			sampleConfigurationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			sampleConfigurationButton.setName("sampleConfigurationButton");
 		}
-		return samplePanel;
-	}
-	private JButton getConfigureSampleButton() {
-		if (configureSampleButton == null) {
-			configureSampleButton = new JButton("Configure New Sample");
-			configureSampleButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-			configureSampleButton.setName("configureSampleButton");
-		}
-		return configureSampleButton;
+		return sampleConfigurationButton;
 	}
 }

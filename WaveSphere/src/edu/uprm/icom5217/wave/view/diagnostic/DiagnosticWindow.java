@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -27,6 +28,8 @@ public class DiagnosticWindow extends JDialog {
 	private JLabel accelerationValueLabel;
 	private JLabel gyroValueLabel;
 	private JLabel magneticValueLabel;
+	
+	private static DiagnosticWindow INSTANCE;
 	
 	public DiagnosticWindow() {
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -164,5 +167,17 @@ public class DiagnosticWindow extends JDialog {
 			});
 		}
 		return stopButton;
+	}
+	
+	private static DiagnosticWindow getInstance(){
+		if(INSTANCE == null){
+			INSTANCE = new DiagnosticWindow();
+		}
+		
+		return INSTANCE;
+	}
+	
+	public static void display(String sphereId){
+		getInstance().setVisible(true);
 	}
 }
