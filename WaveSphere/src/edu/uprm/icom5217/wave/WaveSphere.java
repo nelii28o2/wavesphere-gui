@@ -18,9 +18,7 @@ public class WaveSphere{
 	public static void main(String[] args) {
 		
 		try {
-			System.out.println(UIManager.getLookAndFeel());
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//might make it look better on Mac
-			System.out.println(UIManager.getLookAndFeel());
 		} catch (ClassNotFoundException | InstantiationException
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			System.out.println("Could not apply local look and feel. Using default.");
