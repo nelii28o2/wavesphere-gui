@@ -25,8 +25,6 @@ public class LeftPanel extends JPanel {
 	private JList<String> spheresList;
 
 	private JButton addSphereButton;
-	private JButton deleteAllButton;
-	private JButton downloadAllButton;
 
 	public LeftPanel() {
 		setAlignmentY(Component.TOP_ALIGNMENT);
@@ -47,8 +45,6 @@ public class LeftPanel extends JPanel {
 
 		add(scrollListContainer, "cell 0 0 1 3, grow, shrink 0");
 		add(getAddSphereButton(), "cell 0 3");
-		add(getDownloadAllButton(), "cell 0 4");
-		add(getDeleteAllButton(), "cell 0 5");
 	}
 
 	private JList<String> getSpheresList() {
@@ -78,21 +74,6 @@ public class LeftPanel extends JPanel {
 		}
 
 		return spheresList;
-	}
-
-	private JButton getDeleteAllButton() {
-		if (deleteAllButton == null) {
-			deleteAllButton = new JButton("  Delete All Data  ");
-		}
-
-		return deleteAllButton;
-	}
-
-	private JButton getDownloadAllButton() {
-		if (downloadAllButton == null) {
-			downloadAllButton = new JButton("Download All Data");
-		}
-		return downloadAllButton;
 	}
 
 	private JButton getAddSphereButton() {

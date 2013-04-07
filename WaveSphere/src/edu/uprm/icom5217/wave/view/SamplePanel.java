@@ -11,6 +11,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
@@ -18,6 +20,7 @@ public class SamplePanel extends JPanel{
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
 		add(getSampleStartDateLabel(), "cell 0 0,alignx trailing");
 		add(getJanPmLabel(), "cell 1 0");
+		add(getTabbedPane(), "cell 0 1 2 1,grow");
 		add(getDownloadDataButton(), "cell 0 2,alignx center");
 		add(getDeleteDataButton(), "cell 1 2,alignx center");
 	}
@@ -28,6 +31,11 @@ public class SamplePanel extends JPanel{
 	private JLabel janPmLabel;
 	private JButton downloadDataButton;
 	private JButton deleteDataButton;
+	private JTabbedPane tabbedPane;
+	private JPanel tableTabPanel;
+	private JPanel plainTextTabPanel;
+	private JTextArea textArea;
+	private JTable table;
 
 	
 	private JLabel getSampleStartDateLabel() {
@@ -57,5 +65,47 @@ public class SamplePanel extends JPanel{
 			deleteDataButton.setName("deleteDataButton");
 		}
 		return deleteDataButton;
+	}
+	private JTabbedPane getTabbedPane() {
+		if (tabbedPane == null) {
+			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+			tabbedPane.setName("tabbedPane");
+			tabbedPane.addTab("Table", null, getTableTabPanel(), null);
+			tabbedPane.addTab("Text", null, getPlainTextTabPanel(), null);
+		}
+		return tabbedPane;
+	}
+	private JPanel getTableTabPanel() {
+		if (tableTabPanel == null) {
+			tableTabPanel = new JPanel();
+			tableTabPanel.setName("tableTabPanel");
+			tableTabPanel.setLayout(new MigLayout("", "[grow][1px]", "[grow][1px]"));
+			tableTabPanel.add(getTable(), "cell 0 0,grow");
+		}
+		return tableTabPanel;
+	}
+	private JPanel getPlainTextTabPanel() {
+		if (plainTextTabPanel == null) {
+			plainTextTabPanel = new JPanel();
+			plainTextTabPanel.setName("plainTextTabPanel");
+			plainTextTabPanel.setLayout(new MigLayout("", "[4px,grow]", "[22px,grow]"));
+			plainTextTabPanel.add(getTextArea(), "cell 0 0,grow");
+		}
+		return plainTextTabPanel;
+	}
+	private JTextArea getTextArea() {
+		if (textArea == null) {
+			textArea = new JTextArea();
+			textArea.setEditable(false);
+			textArea.setName("textArea");
+		}
+		return textArea;
+	}
+	private JTable getTable() {
+		if (table == null) {
+			table = new JTable();
+			table.setName("table");
+		}
+		return table;
 	}
 }

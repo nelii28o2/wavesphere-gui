@@ -17,18 +17,16 @@ import java.awt.event.MouseEvent;
 
 public class RightPanel extends JPanel {
 	private JPanel sphereInfoPanel;
-	private JToggleButton newToggleButtonToggleButton;
+	private JToggleButton onButton;
 	private JButton refreshButton;
 	private JButton enterDiagnosticModeButton;
-	private JButton sampleConfigurationButton;
 	public RightPanel() {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Sphere 1", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new MigLayout("", "[41.00][grow][]", "[31.00][101.00,grow][][grow]"));
-		add(getNewToggleButtonToggleButton(), "cell 0 0");
-		add(getEnterDiagnosticModeButton(), "cell 1 0,alignx center");
+		setLayout(new MigLayout("", "[41.00][grow][]", "[42.00][121.00,grow][35.00][]"));
+		add(getOnButton(), "cell 0 0");
 		add(getRefreshButton(), "cell 2 0");
 		add(getSphereInfoPanel(), "flowx,cell 0 1 3 1,growx,aligny top");
-		add(getSampleConfigurationButton(), "cell 1 2,alignx center");
+		add(getEnterDiagnosticModeButton(), "cell 1 2,alignx center");
 	}
 	private JPanel getSphereInfoPanel() {
 		if (sphereInfoPanel == null) {
@@ -37,12 +35,12 @@ public class RightPanel extends JPanel {
 		}
 		return sphereInfoPanel;
 	}
-	private JToggleButton getNewToggleButtonToggleButton() {
-		if (newToggleButtonToggleButton == null) {
-			newToggleButtonToggleButton = new JToggleButton("ON/OFF");
-			newToggleButtonToggleButton.setName("newToggleButtonToggleButton");
+	private JToggleButton getOnButton() {
+		if (onButton == null) {
+			onButton = new JToggleButton("OFF");
+			onButton.setName("onButton");
 		}
-		return newToggleButtonToggleButton;
+		return onButton;
 	}
 	private JButton getRefreshButton() {
 		if (refreshButton == null) {
@@ -63,13 +61,5 @@ public class RightPanel extends JPanel {
 			enterDiagnosticModeButton.setName("enterDiagnosticModeButton");
 		}
 		return enterDiagnosticModeButton;
-	}
-	private JButton getSampleConfigurationButton() {
-		if (sampleConfigurationButton == null) {
-			sampleConfigurationButton = new JButton("Manage Samples");
-			sampleConfigurationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-			sampleConfigurationButton.setName("sampleConfigurationButton");
-		}
-		return sampleConfigurationButton;
 	}
 }

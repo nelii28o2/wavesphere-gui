@@ -2,13 +2,16 @@ package edu.uprm.icom5217.wave.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JComboBox;
 
 public class SphereInfoPanel extends JPanel {
 	
@@ -22,20 +25,26 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel spaceAvailableValueLabel;
 	private JLabel batteryLevelLabel;
 	private JLabel batteryLevelValueLabel;
+	private JButton downloadAllSamplesButton;
+	private JButton clearAllDataButton;
+	private JButton manageSamplesButton;
 	private JComboBox comboBox;
 	
 	public SphereInfoPanel() {
-		setLayout(new MigLayout("", "[grow,leading]15[grow]", "[][][][][]"));
+		setLayout(new MigLayout("", "10[grow,leading]15[]15[grow]10", "15[]10[]10[]10[]10[]10[]10[]"));
 		add(getIdNumberLabel(), "cell 0 0");
-		add(getLdNumberValueLabel(), "cell 1 0");
+		add(getLdNumberValueLabel(), "cell 2 0");
 		add(getLastLocationLabel(), "cell 0 1");
-		add(getLastLocationValueLabel(), "cell 1 1");
+		add(getLastLocationValueLabel(), "cell 2 1");
 		add(getSpaceAvailableLable(), "cell 0 2");
-		add(getSpaceAvailableValueLabel(), "cell 1 2");
+		add(getSpaceAvailableValueLabel(), "cell 2 2");
 		add(getBatteryLevelLabel(), "cell 0 3");
-		add(getBatteryLevelValueLabel(), "cell 1 3");
+		add(getBatteryLevelValueLabel(), "cell 2 3");
 		add(getSamplesLable(), "cell 0 4,alignx leading");
-		add(getComboBox(), "cell 1 4");
+		add(getComboBox_1(), "cell 2 4");
+		add(getDownloadAllSamplesButton(), "flowx,cell 0 5");
+		add(getManageSamplesButton(), "cell 1 5");
+		add(getClearAllDataButton(), "cell 2 5,alignx right");
 	}
 
 	
@@ -111,9 +120,35 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return batteryLevelValueLabel;
 	}
-	private JComboBox getComboBox() {
+	private JButton getDownloadAllSamplesButton() {
+		if (downloadAllSamplesButton == null) {
+			downloadAllSamplesButton = new JButton("Download All Samples");
+			downloadAllSamplesButton.setName("downloadAllSamplesButton");
+		}
+		return downloadAllSamplesButton;
+	}
+	private JButton getClearAllDataButton() {
+		if (clearAllDataButton == null) {
+			clearAllDataButton = new JButton("Clear All Data");
+			clearAllDataButton.setName("clearAllDataButton");
+		}
+		return clearAllDataButton;
+	}
+	private JButton getManageSamplesButton() {
+		if (manageSamplesButton == null) {
+			manageSamplesButton = new JButton("Manage Samples");
+			manageSamplesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
+			manageSamplesButton.setName("manageSamplesButton");
+		}
+		return manageSamplesButton;
+	}
+	private JComboBox getComboBox_1() {
 		if (comboBox == null) {
 			comboBox = new JComboBox();
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 			comboBox.setName("comboBox");
 		}
 		return comboBox;
