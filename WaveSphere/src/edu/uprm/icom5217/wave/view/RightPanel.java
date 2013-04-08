@@ -20,13 +20,15 @@ public class RightPanel extends JPanel {
 	private JToggleButton onButton;
 	private JButton refreshButton;
 	private JButton enterDiagnosticModeButton;
+	private JPanel panel;
 	public RightPanel() {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Sphere 1", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new MigLayout("", "[41.00][grow][]", "[42.00][121.00,grow][35.00][]"));
+		setLayout(new MigLayout("", "[41.00][grow][]", "[42.00][121.00,grow][35.00][][grow]"));
 		add(getOnButton(), "cell 0 0");
 		add(getRefreshButton(), "cell 2 0");
 		add(getSphereInfoPanel(), "flowx,cell 0 1 3 1,growx,aligny top");
 		add(getEnterDiagnosticModeButton(), "cell 1 2,alignx center");
+		add(getPanel(), "cell 1 4,grow");
 	}
 	private JPanel getSphereInfoPanel() {
 		if (sphereInfoPanel == null) {
@@ -61,5 +63,12 @@ public class RightPanel extends JPanel {
 			enterDiagnosticModeButton.setName("enterDiagnosticModeButton");
 		}
 		return enterDiagnosticModeButton;
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new SamplePanel();
+			panel.setName("panel");
+		}
+		return panel;
 	}
 }

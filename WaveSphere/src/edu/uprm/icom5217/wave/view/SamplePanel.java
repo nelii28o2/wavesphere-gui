@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
@@ -36,6 +37,7 @@ public class SamplePanel extends JPanel{
 	private JPanel plainTextTabPanel;
 	private JTextArea textArea;
 	private JTable table;
+	private JScrollPane scrollPane;
 
 	
 	private JLabel getSampleStartDateLabel() {
@@ -79,8 +81,8 @@ public class SamplePanel extends JPanel{
 		if (tableTabPanel == null) {
 			tableTabPanel = new JPanel();
 			tableTabPanel.setName("tableTabPanel");
-			tableTabPanel.setLayout(new MigLayout("", "[grow][1px]", "[grow][1px]"));
-			tableTabPanel.add(getTable(), "cell 0 0,grow");
+			tableTabPanel.setLayout(new MigLayout("", "[grow][grow][1px]", "[144.00,grow][-36.00px]"));
+			tableTabPanel.add(getScrollPane(), "cell 0 0,grow");
 		}
 		return tableTabPanel;
 	}
@@ -104,8 +106,38 @@ public class SamplePanel extends JPanel{
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
+			table.setFillsViewportHeight(true);
+			table.setModel(new DefaultTableModel(
+				new Object[][] {
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+					{null, null, null, null, null, null, null, null, null},
+				},
+				new String[] {
+					"Mag. X", "Mag. Y", "Mag. Z", "Acc. X", "Acc. Y", "Acc. Z", "Gyro X", "Gyro Y", "Gyro Z"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
 			table.setName("table");
 		}
 		return table;
+	}
+	private JScrollPane getScrollPane() {
+		if (scrollPane == null) {
+			scrollPane = new JScrollPane();
+			scrollPane.setName("scrollPane");
+			scrollPane.setViewportView(getTable());
+		}
+		return scrollPane;
 	}
 }

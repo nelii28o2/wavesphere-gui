@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.Component;
 
 public class SphereInfoPanel extends JPanel {
 	
@@ -31,20 +32,20 @@ public class SphereInfoPanel extends JPanel {
 	private JComboBox comboBox;
 	
 	public SphereInfoPanel() {
-		setLayout(new MigLayout("", "10[grow,leading]15[]15[grow]10", "15[]10[]10[]10[]10[]10[]10[]"));
-		add(getIdNumberLabel(), "cell 0 0");
+		setLayout(new MigLayout("", "[212.00,grow,leading]15[96.00]15[grow]", "[]10[]10[]10[]10[]10[23.00]10[]"));
+		add(getIdNumberLabel(), "cell 0 0,alignx right");
 		add(getLdNumberValueLabel(), "cell 2 0");
-		add(getLastLocationLabel(), "cell 0 1");
+		add(getLastLocationLabel(), "cell 0 1,alignx right");
 		add(getLastLocationValueLabel(), "cell 2 1");
-		add(getSpaceAvailableLable(), "cell 0 2");
+		add(getSpaceAvailableLable(), "cell 0 2,alignx right");
 		add(getSpaceAvailableValueLabel(), "cell 2 2");
-		add(getBatteryLevelLabel(), "cell 0 3");
+		add(getBatteryLevelLabel(), "cell 0 3,alignx right");
 		add(getBatteryLevelValueLabel(), "cell 2 3");
-		add(getSamplesLable(), "cell 0 4,alignx leading");
+		add(getSamplesLable(), "cell 0 4,alignx right");
 		add(getComboBox_1(), "cell 2 4");
-		add(getDownloadAllSamplesButton(), "flowx,cell 0 5");
-		add(getManageSamplesButton(), "cell 1 5");
-		add(getClearAllDataButton(), "cell 2 5,alignx right");
+		add(getDownloadAllSamplesButton(), "flowx,cell 0 6");
+		add(getManageSamplesButton(), "cell 1 6");
+		add(getClearAllDataButton(), "cell 2 6,alignx right");
 	}
 
 	
@@ -92,7 +93,7 @@ public class SphereInfoPanel extends JPanel {
 	
 	private JLabel getSpaceAvailableLable(){
 		if(spaceAvailableLabel ==null){
-			spaceAvailableLabel = new JLabel("Memory Available: ");
+			spaceAvailableLabel = new JLabel("Memory Available:");
 			spaceAvailableLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		}
 		
