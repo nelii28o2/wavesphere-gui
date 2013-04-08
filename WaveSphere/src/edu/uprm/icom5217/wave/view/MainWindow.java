@@ -29,7 +29,7 @@ public class MainWindow extends JFrame{
 			splitPane.setAutoscrolls(true);
 			splitPane.setName("splitPane");
 			splitPane.setLeftComponent(new LeftPanel());
-			splitPane.setRightComponent(new RightPanel());
+			splitPane.setRightComponent(new RightPanel2());
 		}
 		return splitPane;
 	}
