@@ -24,7 +24,7 @@ public class WaveSphere{
 			System.out.println("Could not apply local look and feel. Using default.");
 		}
 		
-		window =  new MainWindow();
+		window =  MainWindow.getInstance();
 		EventQueue.invokeLater(new Runnable() {
 			
 			@Override

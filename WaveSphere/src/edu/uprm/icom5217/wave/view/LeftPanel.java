@@ -15,6 +15,8 @@ import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
 import java.awt.Component;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class LeftPanel extends JPanel {
 	/**
@@ -50,6 +52,12 @@ public class LeftPanel extends JPanel {
 	private JList<String> getSpheresList() {
 		if (spheresList == null) {
 			spheresList = new JList<String>();
+			spheresList.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					
+					MainWindow.normalMode();
+				}
+			});
 			spheresList.setAlignmentY(Component.TOP_ALIGNMENT);
 			spheresList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			spheresList.setModel(new AbstractListModel<String>() {// TODO
