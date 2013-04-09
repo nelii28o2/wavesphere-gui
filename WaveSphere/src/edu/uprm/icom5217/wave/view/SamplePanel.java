@@ -11,9 +11,12 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JFileChooser;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
@@ -57,6 +60,12 @@ public class SamplePanel extends JPanel{
 	private JButton getDownloadDataButton() {
 		if (downloadDataButton == null) {
 			downloadDataButton = new JButton("Download Sample");
+			downloadDataButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					JFileChooser fc = new JFileChooser();
+					fc.showSaveDialog(MainWindow.getInstance());
+				}
+			});
 			downloadDataButton.setName("downloadDataButton");
 		}
 		return downloadDataButton;
@@ -106,6 +115,7 @@ public class SamplePanel extends JPanel{
 	private JTable getTable() {
 		if (table == null) {
 			table = new JTable();
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			table.setFillsViewportHeight(true);
 			table.setModel(new DefaultTableModel(
 				new Object[][] {

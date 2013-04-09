@@ -1,6 +1,5 @@
 package edu.uprm.icom5217.wave.view;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,11 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import java.awt.Component;
 
 public class SphereInfoPanel extends JPanel {
 	
@@ -28,7 +27,6 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel batteryLevelValueLabel;
 	private JButton downloadAllSamplesButton;
 	private JButton clearAllDataButton;
-	private JButton manageSamplesButton;
 	private JComboBox comboBox;
 	
 	public SphereInfoPanel() {
@@ -44,7 +42,6 @@ public class SphereInfoPanel extends JPanel {
 		add(getSamplesLable(), "cell 0 4,alignx right");
 		add(getComboBox_1(), "cell 2 4");
 		add(getDownloadAllSamplesButton(), "flowx,cell 0 6");
-		add(getManageSamplesButton(), "cell 1 6");
 		add(getClearAllDataButton(), "cell 2 6,alignx right");
 	}
 
@@ -125,7 +122,9 @@ public class SphereInfoPanel extends JPanel {
 			downloadAllSamplesButton = new JButton("Download All Samples");
 			downloadAllSamplesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					//todo file chooser
+					JFileChooser fc = new JFileChooser();
+					fc.showSaveDialog(MainWindow.getInstance());
+				
 				}
 			});
 			downloadAllSamplesButton.setName("downloadAllSamplesButton");
@@ -138,17 +137,6 @@ public class SphereInfoPanel extends JPanel {
 			clearAllDataButton.setName("clearAllDataButton");
 		}
 		return clearAllDataButton;
-	}
-	private JButton getManageSamplesButton() {
-		if (manageSamplesButton == null) {
-			manageSamplesButton = new JButton("Manage Samples");
-			manageSamplesButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-				}
-			});
-			manageSamplesButton.setName("manageSamplesButton");
-		}
-		return manageSamplesButton;
 	}
 	private JComboBox getComboBox_1() {
 		if (comboBox == null) {
