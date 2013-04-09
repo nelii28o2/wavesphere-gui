@@ -90,7 +90,7 @@ public class SamplePanel extends JPanel{
 		if (tableTabPanel == null) {
 			tableTabPanel = new JPanel();
 			tableTabPanel.setName("tableTabPanel");
-			tableTabPanel.setLayout(new MigLayout("", "[grow][grow][1px]", "[144.00,grow][-36.00px]"));
+			tableTabPanel.setLayout(new MigLayout("fill", "5[445.00,grow]5", "[144.00,grow][-36.00px]"));
 			tableTabPanel.add(getScrollPane(), "cell 0 0,grow");
 		}
 		return tableTabPanel;
@@ -99,7 +99,7 @@ public class SamplePanel extends JPanel{
 		if (plainTextTabPanel == null) {
 			plainTextTabPanel = new JPanel();
 			plainTextTabPanel.setName("plainTextTabPanel");
-			plainTextTabPanel.setLayout(new MigLayout("", "[4px,grow]", "[22px,grow]"));
+			plainTextTabPanel.setLayout(new MigLayout("fill", "[4px,grow]", "[22px,grow]"));
 			plainTextTabPanel.add(getTextArea(), "cell 0 0,grow");
 		}
 		return plainTextTabPanel;
@@ -114,8 +114,13 @@ public class SamplePanel extends JPanel{
 	}
 	private JTable getTable() {
 		if (table == null) {
-			table = new JTable();
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			table = new JTable()  {
+	            public boolean getScrollableTracksViewportWidth()
+	            {
+	                return getPreferredSize().width < getParent().getWidth();
+	            }
+	        };
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			table.setFillsViewportHeight(true);
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
@@ -139,6 +144,7 @@ public class SamplePanel extends JPanel{
 				}
 			});
 			table.setName("table");
+			
 		}
 		return table;
 	}
