@@ -127,7 +127,9 @@ public class SerialCommunication implements SerialPortEventListener {
 		try{
 			if(this.getInputStream().available() > 0){
 				for(int i = 0; i < this.getInputStream().available(); i++){
-					System.out.print((char)this.getInputStream().read());
+					char c = (char)this.getInputStream().read();
+					//System.out.print(c);
+					serialWindow.printToTextArea(c);
 				}
 			}
 			}catch(Exception e){

@@ -2,19 +2,21 @@ import gnu.io.PortInUseException;
 import gnu.io.UnsupportedCommOperationException;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.TooManyListenersException;
 
-import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.event.PopupMenuListener;
-import javax.swing.event.PopupMenuEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.text.DefaultCaret;
 
 
 public class serialWindow {
@@ -25,6 +27,8 @@ public class serialWindow {
 	private JFrame frame;
 	private JComboBox comboBox;
 	private JButton btnOpenPort;
+	private static JTextArea textArea;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -64,17 +68,17 @@ public class serialWindow {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnLed = new JButton("LED1");
+		JButton btnLed = new JButton("LED ON");
 		btnLed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				serial.write(XBee.lang.LED1);
+				serial.write(XBee.lang.LEDON);
 			}
 		});
 		
-		JButton btnLed_1 = new JButton("LED2");
+		JButton btnLed_1 = new JButton("LED OFF");
 		btnLed_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				serial.write(XBee.lang.LED2);
+				serial.write(XBee.lang.LEDOFF);
 			}
 		});
 		
@@ -113,18 +117,26 @@ public class serialWindow {
 		
 		comboBox = new JComboBox(serial.getSerialPorts().toArray());
 		
+		JLabel lblGps = new JLabel("GPS:");
+		
+		scrollPane = new JScrollPane();
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnLed)
-						.addComponent(btnLed_1))
-					.addPreferredGap(ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnOpenPort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnLed)
+								.addComponent(btnLed_1))
+							.addPreferredGap(ComponentPlacement.RELATED, 252, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnOpenPort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addComponent(lblGps))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -138,8 +150,23 @@ public class serialWindow {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnLed_1)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(198, Short.MAX_VALUE))
+					.addGap(11)
+					.addComponent(lblGps)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
+		
+		textArea = new JTextArea();
+		DefaultCaret caret = (DefaultCaret)textArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
+		scrollPane.setViewportView(textArea);
+		textArea.setEditable(false);
 		frame.getContentPane().setLayout(groupLayout);
+	}
+	
+	public static void printToTextArea(char c){
+		textArea.append(""+c);
 	}
 }
