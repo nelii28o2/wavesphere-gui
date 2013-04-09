@@ -66,7 +66,9 @@ public class MainWindow extends JFrame{
 	
 	public static void normalMode(){
 		getInstance().getSplitPane().setRightComponent(BOTONES);
-		getInstance().pack();
 	}
 	 
+	public static void samplingMode(){
+		getInstance().getSplitPane().setRightComponent(new SamplingWaitScreen());
+	}
 }

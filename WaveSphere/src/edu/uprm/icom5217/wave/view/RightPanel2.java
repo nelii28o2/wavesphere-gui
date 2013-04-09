@@ -15,18 +15,28 @@ public class RightPanel2 extends JPanel {
 	private JButton retrievalModeButton;
 	private JButton diagnosticButton;
 	private JLabel bolaIdLabel;
+	private JButton samplingModeButton;
+	private JLabel batterLevelLabel;
+	private JLabel label;
+	private JLabel memoryAvailableLabel;
+	private JLabel mbLabel;
 	public RightPanel2() {
-		setLayout(new MigLayout("", "15[36.00,grow,c][grow, c]15", "15[grow, c]5[grow,c]5[grow,c]5[grow,c]15"));
-		add(getIdLabel(), "cell 0 0,alignx center");
-		add(getBolaIdLabel(), "cell 1 0");
-		add(getRetrievalModeButton(), "cell 0 1 2 1");
-		add(getDiagnosticButton(), "cell 0 3 2 1");
+		setLayout(new MigLayout("fill", "[36.00,grow,center]", "[]5[]5[]5[]5[]5[]"));
+		add(getIdLabel(), "flowx,cell 0 0,alignx center");
+		add(getBatterLevelLabel(), "flowx,cell 0 1");
+		add(getMemoryAvailableLabel(), "flowx,cell 0 2");
+		add(getRetrievalModeButton(), "cell 0 3");
+		add(getSamplingModeButton(), "cell 0 4");
+		add(getDiagnosticButton(), "cell 0 5");
+		add(getBolaIdLabel(), "cell 0 0");
+		add(getLabel(), "cell 0 1");
+		add(getMbLabel(), "cell 0 2");
 	}
 
 
 	private JLabel getIdLabel() {
 		if (idLabel == null) {
-			idLabel = new JLabel("id: ");
+			idLabel = new JLabel("ID:   ");
 			idLabel.setName("idLabel");
 		}
 		return idLabel;
@@ -61,5 +71,45 @@ public class RightPanel2 extends JPanel {
 			bolaIdLabel.setName("bolaIdLabel");
 		}
 		return bolaIdLabel;
+	}
+	private JButton getSamplingModeButton() {
+		if (samplingModeButton == null) {
+			samplingModeButton = new JButton("Sampling Mode");
+			samplingModeButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				 MainWindow.samplingMode();
+				}
+			});
+			samplingModeButton.setName("samplingModeButton");
+		}
+		return samplingModeButton;
+	}
+	private JLabel getBatterLevelLabel() {
+		if (batterLevelLabel == null) {
+			batterLevelLabel = new JLabel("Battery Level : ");
+			batterLevelLabel.setName("batterLevelLabel");
+		}
+		return batterLevelLabel;
+	}
+	private JLabel getLabel() {
+		if (label == null) {
+			label = new JLabel("60%");
+			label.setName("label");
+		}
+		return label;
+	}
+	private JLabel getMemoryAvailableLabel() {
+		if (memoryAvailableLabel == null) {
+			memoryAvailableLabel = new JLabel("Memory Available:  ");
+			memoryAvailableLabel.setName("memoryAvailableLabel");
+		}
+		return memoryAvailableLabel;
+	}
+	private JLabel getMbLabel() {
+		if (mbLabel == null) {
+			mbLabel = new JLabel("105MB");
+			mbLabel.setName("mbLabel");
+		}
+		return mbLabel;
 	}
 }

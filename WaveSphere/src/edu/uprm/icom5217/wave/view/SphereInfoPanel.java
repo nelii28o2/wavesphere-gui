@@ -32,7 +32,7 @@ public class SphereInfoPanel extends JPanel {
 	private JComboBox comboBox;
 	
 	public SphereInfoPanel() {
-		setLayout(new MigLayout("", "[212.00,grow,leading]15[96.00]15[grow]", "[]10[]10[]10[]10[]10[23.00]10[]"));
+		setLayout(new MigLayout("fill", "[212.00,grow,leading]15[96.00]15[grow]", "[]10[]10[]10[]10[]10[23.00]10[]"));
 		add(getIdNumberLabel(), "cell 0 0,alignx right");
 		add(getLdNumberValueLabel(), "cell 2 0");
 		add(getLastLocationLabel(), "cell 0 1,alignx right");
@@ -76,8 +76,7 @@ public class SphereInfoPanel extends JPanel {
 	}
 	private JLabel getLastLocationValueLabel() {
 		if (lastLocationValueLabel == null) {
-			lastLocationValueLabel = new JLabel("1234 N42134S");
-			lastLocationValueLabel.setForeground(Color.BLUE);
+			lastLocationValueLabel = new JLabel("5\u00B0 20' 36.2394\", 5\u00B0 20' 43.8\"");
 			lastLocationValueLabel.setName("lastLocationValueLabel");
 		}
 		return lastLocationValueLabel;
