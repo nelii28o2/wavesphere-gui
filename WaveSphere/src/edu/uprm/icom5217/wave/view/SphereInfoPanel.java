@@ -123,6 +123,11 @@ public class SphereInfoPanel extends JPanel {
 	private JButton getDownloadAllSamplesButton() {
 		if (downloadAllSamplesButton == null) {
 			downloadAllSamplesButton = new JButton("Download All Samples");
+			downloadAllSamplesButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					//todo file chooser
+				}
+			});
 			downloadAllSamplesButton.setName("downloadAllSamplesButton");
 		}
 		return downloadAllSamplesButton;

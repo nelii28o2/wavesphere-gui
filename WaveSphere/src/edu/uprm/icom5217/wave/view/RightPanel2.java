@@ -20,8 +20,9 @@ public class RightPanel2 extends JPanel {
 	private JLabel label;
 	private JLabel memoryAvailableLabel;
 	private JLabel mbLabel;
+	private JButton turnOffButton;
 	public RightPanel2() {
-		setLayout(new MigLayout("fill", "[36.00,grow,center]", "[]5[]5[]5[]5[]5[]"));
+		setLayout(new MigLayout("fill", "[36.00,grow,center]", "[]5[]5[]5[]5[]5[][]"));
 		add(getIdLabel(), "flowx,cell 0 0,alignx center");
 		add(getBatterLevelLabel(), "flowx,cell 0 1");
 		add(getMemoryAvailableLabel(), "flowx,cell 0 2");
@@ -31,6 +32,7 @@ public class RightPanel2 extends JPanel {
 		add(getBolaIdLabel(), "cell 0 0");
 		add(getLabel(), "cell 0 1");
 		add(getMbLabel(), "cell 0 2");
+		add(getTurnOffButton(), "cell 0 6,alignx right");
 	}
 
 
@@ -111,5 +113,23 @@ public class RightPanel2 extends JPanel {
 			mbLabel.setName("mbLabel");
 		}
 		return mbLabel;
+	}
+	private JButton getTurnOffButton() {
+		if (turnOffButton == null) {
+			turnOffButton = new JButton("Turn Off");
+			turnOffButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					if(getTurnOffButton().getText().contains("Off")){
+						getTurnOffButton().setText("Turn On");
+					}
+					else{
+						getTurnOffButton().setText("Turn Off");
+					}
+				
+				}
+			});
+			turnOffButton.setName("turnOffButton");
+		}
+		return turnOffButton;
 	}
 }

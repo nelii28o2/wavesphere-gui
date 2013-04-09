@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.Dimension;
 
 public class MainWindow extends JFrame{
 	
@@ -32,9 +33,10 @@ public class MainWindow extends JFrame{
 	private JSplitPane splitPane;
 	
 	public MainWindow() {
+		setMinimumSize(new Dimension(500, 400));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource(LOGO_PATH)));
 		setTitle("Wave Sphere");
-		getContentPane().setLayout(new MigLayout("fill", "", ""));
+		getContentPane().setLayout(new MigLayout("fill", "[]", "[]"));
 		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
 	}
 
@@ -61,11 +63,14 @@ public class MainWindow extends JFrame{
 	public static void retrievalMode(){
 		getInstance().getSplitPane().setRightComponent(RETRIEVAL_PANEL);
 		getInstance().pack();
-	
+		getInstance().revalidate();
+		getInstance().repaint();
 	}
 	
 	public static void normalMode(){
 		getInstance().getSplitPane().setRightComponent(BOTONES);
+		getInstance().revalidate();
+		getInstance().repaint();
 	}
 	 
 	public static void samplingMode(){

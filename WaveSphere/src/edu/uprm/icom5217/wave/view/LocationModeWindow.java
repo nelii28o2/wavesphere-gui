@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LocationModeWindow extends JDialog{
 	private JLabel theCurentLocationLabel;
@@ -50,6 +52,11 @@ public class LocationModeWindow extends JDialog{
 	private JButton getNewButtonButton() {
 		if (newButtonButton == null) {
 			newButtonButton = new JButton("Exit");
+			newButtonButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
 			newButtonButton.setName("newButtonButton");
 		}
 		return newButtonButton;
