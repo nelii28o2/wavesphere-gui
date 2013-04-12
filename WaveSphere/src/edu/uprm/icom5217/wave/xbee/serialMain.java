@@ -11,7 +11,7 @@ import java.util.TooManyListenersException;
 public class serialMain {
 
 	public static void main(String[] args) throws IOException, PortInUseException, UnsupportedCommOperationException, TooManyListenersException{
-		serialTest serial = new serialTest();
+		SerialCommunication serial = new SerialCommunication();
 
 		serial.openSerialPort("COM7", 9600);
 
