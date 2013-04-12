@@ -1,22 +1,22 @@
 package edu.uprm.icom5217.wave.view;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.JFileChooser;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
@@ -90,7 +90,7 @@ public class SamplePanel extends JPanel{
 		if (tableTabPanel == null) {
 			tableTabPanel = new JPanel();
 			tableTabPanel.setName("tableTabPanel");
-			tableTabPanel.setLayout(new MigLayout("fill", "5[445.00,grow]5", "[144.00,grow][-36.00px]"));
+			tableTabPanel.setLayout(new MigLayout("", "[grow][grow][1px]", "[144.00,grow][-36.00px]"));
 			tableTabPanel.add(getScrollPane(), "cell 0 0,grow");
 		}
 		return tableTabPanel;
@@ -99,7 +99,7 @@ public class SamplePanel extends JPanel{
 		if (plainTextTabPanel == null) {
 			plainTextTabPanel = new JPanel();
 			plainTextTabPanel.setName("plainTextTabPanel");
-			plainTextTabPanel.setLayout(new MigLayout("fill", "[4px,grow]", "[22px,grow]"));
+			plainTextTabPanel.setLayout(new MigLayout("", "[4px,grow]", "[22px,grow]"));
 			plainTextTabPanel.add(getTextArea(), "cell 0 0,grow");
 		}
 		return plainTextTabPanel;
@@ -114,13 +114,8 @@ public class SamplePanel extends JPanel{
 	}
 	private JTable getTable() {
 		if (table == null) {
-			table = new JTable()  {
-	            public boolean getScrollableTracksViewportWidth()
-	            {
-	                return getPreferredSize().width < getParent().getWidth();
-	            }
-	        };
-			table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			table = new JTable();
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 			table.setFillsViewportHeight(true);
 			table.setModel(new DefaultTableModel(
 				new Object[][] {
@@ -144,7 +139,6 @@ public class SamplePanel extends JPanel{
 				}
 			});
 			table.setName("table");
-			
 		}
 		return table;
 	}
