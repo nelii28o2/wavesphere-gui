@@ -18,7 +18,7 @@ public class WaveSphere{
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
 		serial = new SerialCommunication();
 		
 		try {
@@ -27,10 +27,10 @@ public class WaveSphere{
 				| IllegalAccessException | UnsupportedLookAndFeelException e) {
 			System.out.println("Could not apply local look and feel. Using default.");
 		}
-
+		
 		window =  MainWindow.getInstance();
 		EventQueue.invokeLater(new Runnable() {
-
+			
 			@Override
 			public void run() {
 				window.pack();
@@ -39,7 +39,7 @@ public class WaveSphere{
 				window.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			}
 		});
-
+	
 	}
-
+	
 }
