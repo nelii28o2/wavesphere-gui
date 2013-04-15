@@ -73,7 +73,8 @@ public class SerialCommunication implements SerialPortEventListener {
 
 		if (!found) {
 			System.out.println("Could not find port: " + port);
-			System.exit(1);
+			throw new NullPointerException();
+			//System.exit(1);
 		}
 
 

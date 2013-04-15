@@ -1,18 +1,20 @@
 package edu.uprm.icom5217.wave.view;
 
-import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.ComboBoxModel;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.event.ListDataListener;
-import javax.swing.DefaultComboBoxModel;
-
-import edu.uprm.icom5217.wave.model.CommPortModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.TooManyListenersException;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.miginfocom.swing.MigLayout;
+import edu.uprm.icom5217.wave.WaveSphere;
+import edu.uprm.icom5217.wave.model.CommPortModel;
+import gnu.io.PortInUseException;
+import gnu.io.UnsupportedCommOperationException;
 
 public class ConnectionPane extends JPanel {
 	private JLabel pleaseSelectALabel;
@@ -46,7 +48,25 @@ public class ConnectionPane extends JPanel {
 			connectButton = new JButton("Connect");
 			connectButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-				  MainWindow.normalMode();
+					try {
+						WaveSphere.serial.openSerialPort((String) comboBox.getSelectedItem(), 9600);
+						MainWindow.normalMode();
+					} catch (PortInUseException e) {
+						// TODO Auto-generated catch block
+						new msgDialog("Error Opening Serial Port:\nPort is being used by another process...");
+						e.printStackTrace();
+					} catch (UnsupportedCommOperationException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (TooManyListenersException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (NullPointerException e){
+						new msgDialog("Error Opening Serial Port:\nPort does not exist");
+					}
 				}
 			});
 			connectButton.setName("connectButton");
