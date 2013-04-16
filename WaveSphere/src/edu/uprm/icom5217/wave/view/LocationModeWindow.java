@@ -14,7 +14,7 @@ import edu.uprm.icom5217.wave.xbee.XBee;
 
 public class LocationModeWindow extends JDialog{
 	private JLabel theCurentLocationLabel;
-	private JLabel newLabelLabel;
+	public static JLabel newLabelLabel;
 	private JLabel label;
 	private JButton newButtonButton;
 	public LocationModeWindow() {

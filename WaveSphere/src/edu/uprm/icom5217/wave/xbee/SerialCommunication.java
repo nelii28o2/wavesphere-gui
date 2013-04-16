@@ -1,6 +1,7 @@
 package edu.uprm.icom5217.wave.xbee;
 
 
+import edu.uprm.icom5217.wave.view.LocationModeWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
 
+import javax.swing.JLabel;
+
 
 public class SerialCommunication implements SerialPortEventListener {
 
@@ -24,6 +27,10 @@ public class SerialCommunication implements SerialPortEventListener {
 	private  PrintStream outputStream;
 
 	private  SerialPort serialPort;
+
+	private int index;
+
+	private StringBuilder sb = new StringBuilder();
 
 	public SerialCommunication(){
 
@@ -159,6 +166,20 @@ public class SerialCommunication implements SerialPortEventListener {
 						break;
 					case XBee.lang.SAMPLING_MODE:
 						//print to locate area
+						if(index < 22){
+							if(c == ',')
+								c = ' ';
+							sb .append(c);
+							if(index == 1 || index == 12)
+								sb.append("\u00B0 ");
+						}
+
+						else if(index == 46){
+							LocationModeWindow.newLabelLabel = new JLabel(sb.toString());
+							sb = new StringBuilder();
+							index = 0;
+						}
+
 						break;
 					case XBee.lang.STATUS_MODE:
 						//print to status area
