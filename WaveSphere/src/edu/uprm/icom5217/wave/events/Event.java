@@ -1,6 +1,5 @@
 package edu.uprm.icom5217.wave.events;
 
-import edu.uprm.icom5217.wave.events.Event.Type;
 
 public abstract class Event<T> {
 	

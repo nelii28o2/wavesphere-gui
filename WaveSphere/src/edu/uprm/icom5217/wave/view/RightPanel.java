@@ -14,9 +14,12 @@ import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.xbee.XBee;
 
 public class RightPanel extends JPanel {
+	
+	private static final long serialVersionUID = -9151818196289914762L;
 	private JPanel sphereInfoPanel;
 	private JButton exitButton;
 	private JPanel panel;
+	
 	public RightPanel() {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 2), "Sphere 1", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new MigLayout("", "[41.00][grow][]", "[42.00][121.00,grow][35.00][][grow]"));

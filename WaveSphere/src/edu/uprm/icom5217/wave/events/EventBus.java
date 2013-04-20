@@ -6,7 +6,7 @@ import java.util.Map;
 public class EventBus {
 
 	private Map<Event.Type<EventHandler>, EventHandler> map;
-	private final static EventBus INSTANCE = new EventBus();
+	//private final static EventBus INSTANCE = new EventBus();
 	
 	private EventBus(){
 		map = new HashMap<Event.Type<EventHandler>, EventHandler>();

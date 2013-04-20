@@ -1,6 +1,7 @@
 package edu.uprm.icom5217.wave.xbee;
 
 
+import edu.uprm.icom5217.wave.utils.SampleFile;
 import edu.uprm.icom5217.wave.view.LocationModeWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
@@ -21,19 +22,24 @@ import java.util.TooManyListenersException;
 
 public class SerialCommunication implements SerialPortEventListener {
 
-	public int flag = XBee.lang.STATUS_MODE;
+	public int flag;
 
 	private  InputStream inputStream;
 	private  PrintStream outputStream;
 
 	private  SerialPort serialPort;
 
-	private StringBuilder sb = new StringBuilder();
+	private StringBuilder sb;
 
-	int index = 0;
+	private int index;
+	
+	SampleFile f;
 
-	public SerialCommunication(){
-
+	public SerialCommunication() throws IOException{
+		sb = new StringBuilder();
+		flag = XBee.lang.STATUS_MODE;
+		index = 0;
+		f = new SampleFile();
 	}	
 
 	public int getFlag() {
@@ -155,17 +161,19 @@ public class SerialCommunication implements SerialPortEventListener {
 
 					switch(flag){
 					case XBee.lang.ID:
-						//quitar
+						//quitar, esta en status
 						break;
 					case XBee.lang.RETRIEVAL_MODE:
-						//store in temp file
+						f.writeToFile(c);
+						if(c == '\n')//or EOF or something
+							f.flush();
 						break;
 					case XBee.lang.SHUTDOWN_MODE:
 						//nothing?
 						break;
 					case XBee.lang.SAMPLING_MODE:
+						sb.append(c);
 						if(c=='\n'){
-							sb.append(c);
 							String s = sb.toString();
 							if(s.contains("$GPRMC")){
 								//if(!s.contains("V")){
@@ -180,12 +188,11 @@ public class SerialCommunication implements SerialPortEventListener {
 							sb = new StringBuilder();
 						}
 
-						else
-							sb.append(c);
 						break;
 					case XBee.lang.STATUS_MODE:
+						sb.append(c);
 						if(c=='\n'){
-							sb.append(c);
+							
 							String s = sb.toString();
 							switch(index){
 							case 0:
@@ -203,14 +210,14 @@ public class SerialCommunication implements SerialPortEventListener {
 							sb = new StringBuilder();
 						}
 
-						else{
+						else
 							index++;
-							sb.append(c);
-						}
+
 						break;
 					case XBee.lang.DIAGNOSTIC_MODE:
+						sb.append(c);
 						if(c=='\n'){
-							sb.append(c);
+							
 							String s = sb.toString();
 
 							switch(index){
@@ -240,10 +247,9 @@ public class SerialCommunication implements SerialPortEventListener {
 
 						}
 
-						else{
-							sb.append(c);
+						else
 							index++;
-						}
+						
 						break;
 					default:
 						System.out.println(c);
@@ -280,14 +286,14 @@ public class SerialCommunication implements SerialPortEventListener {
 	}
 
 	public void write(String data){
-		//outputStream.print(data);
+		outputStream.print(data);
 		//outputStream.print("\r\n"); //needed for AT commands
-		//outputStream.flush();
+		outputStream.flush();
 	}
 
 	public void write(int data){
-		//outputStream.write(data);
-		//outputStream.flush();
+		outputStream.write(data);
+		outputStream.flush();
 
 	}
 

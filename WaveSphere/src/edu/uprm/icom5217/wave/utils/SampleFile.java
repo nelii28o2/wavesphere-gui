@@ -17,4 +17,9 @@ public class SampleFile {
 	public void writeToFile(char c) throws IOException{
 		fw.append(c);
 	}
+	
+	public void flush() throws IOException{
+		fw.flush();
+		fw.close();
+	}
 }

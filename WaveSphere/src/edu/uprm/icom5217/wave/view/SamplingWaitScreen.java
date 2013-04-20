@@ -11,6 +11,7 @@ import javax.swing.Timer;
 import net.miginfocom.swing.MigLayout;
 
 public class SamplingWaitScreen extends JPanel{
+	private static final long serialVersionUID = -5703286762738329221L;
 	private JProgressBar progressBar;
 	private JLabel pleaseWaitLabel;
 	

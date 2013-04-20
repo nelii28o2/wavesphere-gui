@@ -17,8 +17,9 @@ import gnu.io.PortInUseException;
 import gnu.io.UnsupportedCommOperationException;
 
 public class ConnectionPane extends JPanel {
+	private static final long serialVersionUID = -8905655347775103530L;
 	private JLabel pleaseSelectALabel;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JButton connectButton;
 	public ConnectionPane() {
 		setLayout(new MigLayout("", "[c,grow]", "[c][c]"));
@@ -35,9 +36,9 @@ public class ConnectionPane extends JPanel {
 		}
 		return pleaseSelectALabel;
 	}
-	private JComboBox getComboBox() {
+	private JComboBox<String> getComboBox() {
 		if (comboBox == null) {
-			comboBox = new JComboBox();
+			comboBox = new JComboBox<String>();
 			comboBox.setModel(new CommPortModel());
 			comboBox.setName("comboBox");
 		}

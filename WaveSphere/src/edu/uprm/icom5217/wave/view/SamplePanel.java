@@ -131,10 +131,12 @@ public class SamplePanel extends JPanel{
 					"Mag. X", "Mag. Y", "Mag. Z", "Acc. X", "Acc. Y", "Acc. Z", "Gyro X", "Gyro Y", "Gyro Z"
 				}
 			) {
-				Class[] columnTypes = new Class[] {
+				
+				private static final long serialVersionUID = 3959584450564397259L;
+				Class<?>[] columnTypes = new Class[] {
 					Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class, Float.class
 				};
-				public Class getColumnClass(int columnIndex) {
+				public Class<?> getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
 			});

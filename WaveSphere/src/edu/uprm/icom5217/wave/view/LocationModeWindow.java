@@ -13,6 +13,7 @@ import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.xbee.XBee;
 
 public class LocationModeWindow extends JDialog{
+	private static final long serialVersionUID = -7898091034199268682L;
 	private JLabel theCurentLocationLabel;
 	private JLabel locationLabel;
 	private JButton newButtonButton;

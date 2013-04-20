@@ -27,7 +27,7 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel batteryLevelValueLabel;
 	private JButton downloadAllSamplesButton;
 	private JButton clearAllDataButton;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	
 	public SphereInfoPanel() {
 		setLayout(new MigLayout("fill", "[212.00,grow,leading]15[96.00]15[grow]", "[]10[]10[]10[]10[]10[23.00]10[]"));
@@ -138,10 +138,10 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return clearAllDataButton;
 	}
-	private JComboBox getComboBox_1() {
+	private JComboBox<String> getComboBox_1() {
 		if (comboBox == null) {
-			comboBox = new JComboBox();
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
+			comboBox = new JComboBox<String>();
+			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
 			comboBox.setName("comboBox");
 		}
 		return comboBox;
