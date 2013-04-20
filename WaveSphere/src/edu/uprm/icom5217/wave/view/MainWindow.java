@@ -21,7 +21,7 @@ public class MainWindow extends JFrame{
 	
 	private static MainWindow INSTANCE;
 	private static final RightPanel RETRIEVAL_PANEL = new RightPanel();
-	private static final RightPanel2 BOTONES = new RightPanel2();
+	private static final RightPanel2 BOTONES = RightPanel2.getInstance();
 
 	private final static JPanel defaultRightPanel = new JPanel();
 	static{

@@ -2,6 +2,7 @@ package edu.uprm.icom5217.wave.view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
+import edu.uprm.icom5217.wave.utils.SampleFile;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import edu.uprm.icom5217.wave.xbee.XBee;
 
@@ -20,11 +22,22 @@ public class RightPanel2 extends JPanel {
 	private JLabel bolaIdLabel;
 	private JButton samplingModeButton;
 	private JLabel batterLevelLabel;
-	private JLabel label;
+	private JLabel levelLabel;
 	private JLabel memoryAvailableLabel;
 	private JLabel mbLabel;
 	private JButton turnOffButton;
-	public RightPanel2() {
+	
+	public static RightPanel2 instance;
+	
+	public static RightPanel2 getInstance(){
+		if(instance == null)
+			instance = new RightPanel2();
+		
+		return instance;
+	}
+	
+	private RightPanel2() {
+		
 		setLayout(new MigLayout("fill", "[36.00,grow,center]", "[]5[]5[]5[]5[]5[][]"));
 		add(getIdLabel(), "flowx,cell 0 0,alignx center");
 		add(getBatterLevelLabel(), "flowx,cell 0 1");
@@ -33,7 +46,7 @@ public class RightPanel2 extends JPanel {
 		add(getSamplingModeButton(), "cell 0 4");
 		add(getDiagnosticButton(), "cell 0 5");
 		add(getBolaIdLabel(), "cell 0 0");
-		add(getLabel(), "cell 0 1");
+		add(getLevelLabel(), "cell 0 1");
 		add(getMbLabel(), "cell 0 2");
 		add(getTurnOffButton(), "cell 0 6,alignx right");
 	}
@@ -51,8 +64,6 @@ public class RightPanel2 extends JPanel {
 			retrievalModeButton = new JButton("Retrieval Mode");
 			retrievalModeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					WaveSphere.serial.write(XBee.lang.RETRIEVAL_MODE);
-					WaveSphere.serial.setFlag(XBee.lang.RETRIEVAL_MODE);
 					MainWindow.retrievalMode();
 				}
 			});
@@ -107,12 +118,12 @@ public class RightPanel2 extends JPanel {
 		}
 		return batterLevelLabel;
 	}
-	private JLabel getLabel() {
-		if (label == null) {
-			label = new JLabel("60%");
-			label.setName("label");
+	private JLabel getLevelLabel() {
+		if (levelLabel == null) {
+			levelLabel = new JLabel("60%");
+			levelLabel.setName("label");
 		}
-		return label;
+		return levelLabel;
 	}
 	private JLabel getMemoryAvailableLabel() {
 		if (memoryAvailableLabel == null) {
@@ -149,4 +160,21 @@ public class RightPanel2 extends JPanel {
 		}
 		return turnOffButton;
 	}
+
+
+	public void setBolaIdLabel(String s) {
+		bolaIdLabel.setText(s);
+	}
+
+
+	public void setLevelLabel(String s) {
+		levelLabel.setText(s);
+	}
+
+
+	public void setMbLabel(String s) {
+		mbLabel.setText(s);
+	}
+	
+	
 }

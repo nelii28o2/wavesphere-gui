@@ -14,17 +14,25 @@ import edu.uprm.icom5217.wave.xbee.XBee;
 
 public class LocationModeWindow extends JDialog{
 	private JLabel theCurentLocationLabel;
-	public static JLabel newLabelLabel;
-	private JLabel label;
+	private JLabel locationLabel;
 	private JButton newButtonButton;
-	public LocationModeWindow() {
+
+	private static LocationModeWindow instance;
+
+	public static LocationModeWindow getInstance(){
+		if(instance == null)
+			instance = new LocationModeWindow();
+
+		return instance;
+	}
+
+	private LocationModeWindow() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LocationModeWindow.class.getResource("/img/wavespherelogo.png")));
 		setTitle("Location of Sphere 1");
 		setResizable(false);
 		getContentPane().setLayout(new MigLayout("fill", "[center]", "[164.00,center][center]"));
 		getContentPane().add(getTheCurentLocationLabel(), "flowx,cell 0 0");
-		getContentPane().add(getNewLabelLabel(), "cell 0 0");
-		getContentPane().add(getLabel(), "cell 0 0");
+		getContentPane().add(getLocationLabel(), "cell 0 0");
 		getContentPane().add(getNewButtonButton(), "cell 0 1");
 		pack();
 		setVisible(true);
@@ -38,19 +46,11 @@ public class LocationModeWindow extends JDialog{
 		}
 		return theCurentLocationLabel;
 	}
-	private JLabel getNewLabelLabel() {
-		if (newLabelLabel == null) {
-			newLabelLabel = new JLabel("5\u00B0 20' 43.8\"");
-			newLabelLabel.setName("newLabelLabel");
+	private JLabel getLocationLabel() {
+		if (locationLabel == null) {
+			locationLabel = new JLabel("");
 		}
-		return newLabelLabel;
-	}
-	private JLabel getLabel() {
-		if (label == null) {
-			label = new JLabel(", 5\u00B0 20' 36.2394\"");
-			label.setName("label");
-		}
-		return label;
+		return locationLabel;
 	}
 	private JButton getNewButtonButton() {
 		if (newButtonButton == null) {
@@ -65,5 +65,9 @@ public class LocationModeWindow extends JDialog{
 			newButtonButton.setName("newButtonButton");
 		}
 		return newButtonButton;
+	}
+
+	public void setLabel(String s){
+		locationLabel.setText(s);
 	}
 }

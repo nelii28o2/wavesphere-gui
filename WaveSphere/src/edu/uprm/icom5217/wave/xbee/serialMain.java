@@ -3,7 +3,6 @@ import gnu.io.PortInUseException;
 import gnu.io.UnsupportedCommOperationException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.TooManyListenersException;
 
@@ -15,11 +14,11 @@ public class serialMain {
 
 		serial.openSerialPort("COM7", 9600);
 
-		InputStream inputStream = serial.getInputStream();
+		//InputStream inputStream = serial.getInputStream();
 		PrintStream outputStream = serial.getOutputStream();
 
 		//do stuff
-		byte[] b = new byte[2];
+		//byte[] b = new byte[2];
 		outputStream.print("B");
 		outputStream.print("\r\n");
 		

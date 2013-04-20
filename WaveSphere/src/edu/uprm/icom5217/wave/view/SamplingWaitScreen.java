@@ -21,7 +21,7 @@ public class SamplingWaitScreen extends JPanel{
 		   getProgressBar().setValue(++count);
 		   if(count >= 30){
 			   MainWindow.normalMode();
-			   new LocationModeWindow();
+			   LocationModeWindow.getInstance();
 			   done();
 		   }
 			

@@ -2,6 +2,8 @@ package edu.uprm.icom5217.wave.xbee;
 
 
 import edu.uprm.icom5217.wave.view.LocationModeWindow;
+import edu.uprm.icom5217.wave.view.RightPanel2;
+import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
@@ -16,21 +18,19 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
 
-import javax.swing.JLabel;
-
 
 public class SerialCommunication implements SerialPortEventListener {
 
-	public int flag;
-	
+	public int flag = XBee.lang.STATUS_MODE;
+
 	private  InputStream inputStream;
 	private  PrintStream outputStream;
 
 	private  SerialPort serialPort;
 
-	private int index;
-
 	private StringBuilder sb = new StringBuilder();
+
+	int index = 0;
 
 	public SerialCommunication(){
 
@@ -151,12 +151,11 @@ public class SerialCommunication implements SerialPortEventListener {
 			if(this.getInputStream().available() > 0){
 				for(int i = 0; i < this.getInputStream().available(); i++){
 					char c = (char)this.getInputStream().read();
-					System.out.print(c);
 					//serialWindow.printToTextArea(c);
-					
+
 					switch(flag){
 					case XBee.lang.ID:
-						//print to id area
+						//quitar
 						break;
 					case XBee.lang.RETRIEVAL_MODE:
 						//store in temp file
@@ -165,27 +164,86 @@ public class SerialCommunication implements SerialPortEventListener {
 						//nothing?
 						break;
 					case XBee.lang.SAMPLING_MODE:
-						//print to locate area
-						if(index < 22){
-							if(c == ',')
-								c = ' ';
-							sb .append(c);
-							if(index == 1 || index == 12)
-								sb.append("\u00B0 ");
-						}
+						if(c=='\n'){
+							sb.append(c);
+							String s = sb.toString();
+							if(s.contains("$GPRMC")){
+								//if(!s.contains("V")){
+								String[] st = s.split(",");
+								s = (st[3].length()>0? (st[3].substring(0, 2) + "\u00B0 " 
+										+ st[3].substring(2) + "' ") : "xx\u00B0 mm.dddd' ") + st[4] + ", "
+										+ (st[5].length()>0? (st[5].substring(0,3) + "\u00B0 " 
+												+ st[5].substring(3) + "' ") : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
 
-						else if(index == 46){
-							LocationModeWindow.newLabelLabel = new JLabel(sb.toString());
+								LocationModeWindow.getInstance().setLabel(s);
+							}
 							sb = new StringBuilder();
-							index = 0;
 						}
 
+						else
+							sb.append(c);
 						break;
 					case XBee.lang.STATUS_MODE:
-						//print to status area
+						if(c=='\n'){
+							sb.append(c);
+							String s = sb.toString();
+							switch(index){
+							case 0:
+								RightPanel2.getInstance().setBolaIdLabel(s);
+								break;
+							case 1:
+								RightPanel2.getInstance().setLevelLabel(s);
+								break;
+
+							default:
+								RightPanel2.getInstance().setMbLabel(s);
+								index = 0;
+								break;
+							}
+							sb = new StringBuilder();
+						}
+
+						else{
+							index++;
+							sb.append(c);
+						}
 						break;
 					case XBee.lang.DIAGNOSTIC_MODE:
-						//print to diagnostic window
+						if(c=='\n'){
+							sb.append(c);
+							String s = sb.toString();
+
+							switch(index){
+							case 0:
+								DiagnosticWindow.getInstance().setAccelerationValueLabel(s);
+								break;
+							case 1:
+								DiagnosticWindow.getInstance().setGyroValueLabel(s);
+								break;
+							case 2:
+								DiagnosticWindow.getInstance().setMagneticValueLabel(s);
+								break;
+							case 3:
+								DiagnosticWindow.getInstance().setLocationValueLabel(s);
+								break;
+							case 4:
+								DiagnosticWindow.getInstance().setMemoryValueLabel(s);
+								break;
+							case 5:
+								DiagnosticWindow.getInstance().setBatteryValueLabel(s);
+								break;
+							default:
+								DiagnosticWindow.getInstance().setWirelssValueLabel(s);
+								index = 0;
+							}
+							sb = new StringBuilder();
+
+						}
+
+						else{
+							sb.append(c);
+							index++;
+						}
 						break;
 					default:
 						System.out.println(c);
@@ -193,15 +251,15 @@ public class SerialCommunication implements SerialPortEventListener {
 					}
 				}
 			}
-			}catch(Exception e){
-				System.out.println("Error getting data");
-			}
+		}catch(Exception e){
+			System.out.println("Error getting data");
+		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getSerialPorts(){
 		ArrayList<String> serialPorts = new ArrayList<String>();
-		
+
 		Enumeration<CommPortIdentifier> portList = CommPortIdentifier.getPortIdentifiers();
 
 		CommPortIdentifier portId = null;
@@ -217,16 +275,16 @@ public class SerialCommunication implements SerialPortEventListener {
 
 			}
 		}
-		
+
 		return serialPorts;
 	}
-	
+
 	public void write(String data){
 		//outputStream.print(data);
 		//outputStream.print("\r\n"); //needed for AT commands
 		//outputStream.flush();
 	}
-	
+
 	public void write(int data){
 		//outputStream.write(data);
 		//outputStream.flush();
