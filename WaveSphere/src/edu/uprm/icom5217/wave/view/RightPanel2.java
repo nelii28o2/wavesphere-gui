@@ -87,8 +87,8 @@ public class RightPanel2 extends JPanel {
 	}
 	private JLabel getBolaIdLabel() {
 		if (bolaIdLabel == null) {
-			WaveSphere.serial.write(XBee.lang.ID);
-			WaveSphere.serial.setFlag(XBee.lang.ID);
+			//WaveSphere.serial.write(XBee.lang.ID);
+			//WaveSphere.serial.setFlag(XBee.lang.ID);
 			//TODO do something to wait for id
 			bolaIdLabel = new JLabel("827345980236");
 			bolaIdLabel.setName("bolaIdLabel");
