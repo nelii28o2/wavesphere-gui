@@ -26,7 +26,6 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel batteryLevelLabel;
 	private JLabel batteryLevelValueLabel;
 	private JButton downloadAllSamplesButton;
-	private JButton clearAllDataButton;
 	private JComboBox<String> comboBox;
 	
 	public SphereInfoPanel() {
@@ -41,8 +40,7 @@ public class SphereInfoPanel extends JPanel {
 		add(getBatteryLevelValueLabel(), "cell 2 3");
 		add(getSamplesLable(), "cell 0 4,alignx right");
 		add(getComboBox_1(), "cell 2 4");
-		add(getDownloadAllSamplesButton(), "flowx,cell 0 6");
-		add(getClearAllDataButton(), "cell 2 6,alignx right");
+		add(getDownloadAllSamplesButton(), "flowx,cell 1 6");
 	}
 
 	
@@ -119,7 +117,7 @@ public class SphereInfoPanel extends JPanel {
 	}
 	private JButton getDownloadAllSamplesButton() {
 		if (downloadAllSamplesButton == null) {
-			downloadAllSamplesButton = new JButton("Download All Samples");
+			downloadAllSamplesButton = new JButton("Download Samples");
 			downloadAllSamplesButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser fc = new JFileChooser();
@@ -130,13 +128,6 @@ public class SphereInfoPanel extends JPanel {
 			downloadAllSamplesButton.setName("downloadAllSamplesButton");
 		}
 		return downloadAllSamplesButton;
-	}
-	private JButton getClearAllDataButton() {
-		if (clearAllDataButton == null) {
-			clearAllDataButton = new JButton("Clear All Data");
-			clearAllDataButton.setName("clearAllDataButton");
-		}
-		return clearAllDataButton;
 	}
 	private JComboBox<String> getComboBox_1() {
 		if (comboBox == null) {

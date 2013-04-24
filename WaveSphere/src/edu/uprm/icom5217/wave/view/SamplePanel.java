@@ -21,12 +21,11 @@ import net.miginfocom.swing.MigLayout;
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
 		setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Sample 1", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		setLayout(new MigLayout("", "[grow][grow]", "[][grow][]"));
+		setLayout(new MigLayout("", "[grow][][grow]", "[][grow][]"));
 		add(getSampleStartDateLabel(), "cell 0 0,alignx trailing");
-		add(getJanPmLabel(), "cell 1 0");
-		add(getTabbedPane(), "cell 0 1 2 1,grow");
-		add(getDownloadDataButton(), "cell 0 2,alignx center");
-		add(getDeleteDataButton(), "cell 1 2,alignx center");
+		add(getJanPmLabel(), "cell 2 0");
+		add(getTabbedPane(), "cell 0 1 3 1,grow");
+		add(getDownloadDataButton(), "cell 1 2,alignx center");
 	}
 
 	
@@ -34,7 +33,6 @@ public class SamplePanel extends JPanel{
 	private JLabel sampleStartDateLabel;
 	private JLabel janPmLabel;
 	private JButton downloadDataButton;
-	private JButton deleteDataButton;
 	private JTabbedPane tabbedPane;
 	private JPanel tableTabPanel;
 	private JPanel plainTextTabPanel;
@@ -69,13 +67,6 @@ public class SamplePanel extends JPanel{
 			downloadDataButton.setName("downloadDataButton");
 		}
 		return downloadDataButton;
-	}
-	private JButton getDeleteDataButton() {
-		if (deleteDataButton == null) {
-			deleteDataButton = new JButton("Delete Sample");
-			deleteDataButton.setName("deleteDataButton");
-		}
-		return deleteDataButton;
 	}
 	private JTabbedPane getTabbedPane() {
 		if (tabbedPane == null) {
