@@ -141,19 +141,10 @@ public class RightPanel2 extends JPanel {
 	}
 	private JButton getTurnOffButton() {
 		if (turnOffButton == null) {
-			turnOffButton = new JButton("Turn Off");
+			turnOffButton = new JButton("Shutdown Mode");
 			turnOffButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(getTurnOffButton().getText().contains("Off")){
-						WaveSphere.serial.write(XBee.lang.SHUTDOWN_MODE);
-						WaveSphere.serial.setFlag(XBee.lang.SHUTDOWN_MODE);
-						getTurnOffButton().setText("Turn On");
-					}
-					else{
-						//TODO send RF signal
-						getTurnOffButton().setText("Turn Off");
-					}
-
+					MainWindow.connectMode();
 				}
 			});
 			turnOffButton.setName("turnOffButton");
