@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import edu.uprm.icom5217.wave.WaveSphere;
+
 import net.miginfocom.swing.MigLayout;
 
 public class MainWindow extends JFrame{
@@ -79,5 +81,11 @@ public class MainWindow extends JFrame{
 	}
 	public static void samplingMode(){
 		getInstance().getSplitPane().setRightComponent(new SamplingWaitScreen());
+	}
+	
+	@Override
+	public void dispose() {
+		super.dispose();
+		WaveSphere.serial.close();
 	}
 }
