@@ -12,19 +12,14 @@ import net.miginfocom.swing.MigLayout;
 
 public class SamplingWaitScreen extends JPanel{
 	private static final long serialVersionUID = -5703286762738329221L;
-	private JProgressBar progressBar;
+	private static JProgressBar progressBar;
 	private JLabel pleaseWaitLabel;
 	
-	final Timer t  = new Timer(1000, new ActionListener() {
+	final static Timer t  = new Timer(1000, new ActionListener() {
 		int count = 0;
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 		   getProgressBar().setValue(++count);
-		   if(count >= 30){
-			   MainWindow.normalMode();
-			   LocationModeWindow.getInstance();
-			   done();
-		   }
 			
 		}
 	});
@@ -37,11 +32,11 @@ public class SamplingWaitScreen extends JPanel{
 		
 	}
 	
-	private void done(){
+	public static void done(){
 		t.stop();
 	}
 
-	private JProgressBar getProgressBar() {
+	private static JProgressBar getProgressBar() {
 		if (progressBar == null) {
 			progressBar = new JProgressBar();
 			progressBar.setMaximum(30);

@@ -41,7 +41,7 @@ public class MainWindow extends JFrame{
 		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
 	}
 
-	private JSplitPane getSplitPane() {
+	public JSplitPane getSplitPane() {
 		if (splitPane == null) {
 			splitPane = new JSplitPane();
 			splitPane.setEnabled(false);

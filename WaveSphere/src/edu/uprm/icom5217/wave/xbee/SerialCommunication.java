@@ -2,9 +2,11 @@ package edu.uprm.icom5217.wave.xbee;
 
 
 import edu.uprm.icom5217.wave.utils.SampleFile;
-import edu.uprm.icom5217.wave.view.LocationModeWindow;
+import edu.uprm.icom5217.wave.view.LocatePanel;
 import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
+import edu.uprm.icom5217.wave.view.SamplingWaitScreen;
+import edu.uprm.icom5217.wave.view.msgDialog;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -24,6 +26,8 @@ import java.util.TooManyListenersException;
 public class SerialCommunication implements SerialPortEventListener {
 
 	public Xbee flag;
+	
+	private boolean samplingFirstTime = true;
 
 	private  InputStream inputStream;
 	private  PrintStream outputStream;
@@ -33,7 +37,7 @@ public class SerialCommunication implements SerialPortEventListener {
 	private StringBuilder sb;
 
 	private int index;
-	
+
 	SampleFile f;
 
 	public SerialCommunication() throws IOException{
@@ -49,6 +53,10 @@ public class SerialCommunication implements SerialPortEventListener {
 
 	public void setFlag(Xbee command) {
 		this.flag = command;
+	}
+	
+	public void resetSamplingFlag(){
+		this.samplingFirstTime = true;
 	}
 
 	public  void openSerialPort(String port, int baudRate) throws PortInUseException, UnsupportedCommOperationException, TooManyListenersException, IOException {
@@ -82,7 +90,7 @@ public class SerialCommunication implements SerialPortEventListener {
 		}
 
 		if (!found) {
-			System.out.println("Could not find port: " + port);
+			//System.out.println("Could not find port: " + port);
 			throw new NullPointerException();
 			//System.exit(1);
 		}
@@ -112,20 +120,20 @@ public class SerialCommunication implements SerialPortEventListener {
 		try {
 			serialPort.getInputStream().close();
 		} catch (Exception e) {
-			System.out.println("Exception while closing input stream");
+			//System.out.println("Exception while closing input stream");
 		}
 
 		try {
 			serialPort.getOutputStream().close();
 		} catch (Exception e) {
-			System.out.println("Exception while closing output stream");
+			//System.out.println("Exception while closing output stream");
 		}
 
 		try {
 			// this call blocks while thread is attempting to read from inputstream
 			serialPort.close();
 		} catch (Exception e) {
-			System.out.println("Exception while closing serial port");
+			//System.out.println("Exception while closing serial port");
 		}
 	}
 
@@ -144,7 +152,7 @@ public class SerialCommunication implements SerialPortEventListener {
 			break;
 
 		default:
-			System.out.println("Ignored event: " + event.getEventType());
+			//System.out.println("Ignored event: " + event.getEventType());
 			break;
 		}
 	}
@@ -160,7 +168,7 @@ public class SerialCommunication implements SerialPortEventListener {
 					case STATUS_MODE:
 						sb.append(c);
 						if(c=='\n'){
-							
+
 							String s = sb.toString();
 							switch(index){
 							case 0:
@@ -182,7 +190,7 @@ public class SerialCommunication implements SerialPortEventListener {
 							index++;
 
 						break;
-					
+
 					case RETRIEVAL_MODE:
 						//parsear datos antes de grabar
 						f.writeToFile(c);
@@ -191,8 +199,13 @@ public class SerialCommunication implements SerialPortEventListener {
 							MainWindow.retrievalMode();
 						}
 						break;
-					
+
 					case SAMPLING_MODE:
+						if(samplingFirstTime){
+							SamplingWaitScreen.done();
+							MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
+							samplingFirstTime = false;
+						}
 						sb.append(c);
 						if(c=='\n'){
 							String s = sb.toString();
@@ -204,17 +217,18 @@ public class SerialCommunication implements SerialPortEventListener {
 										+ (st[5].length()>0? (st[5].substring(0,3) + "\u00B0 " 
 												+ st[5].substring(3) + "' ") : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
 
-								LocationModeWindow.getInstance().setLabel(s);
+								LocatePanel.getInstance().setLabel(s);
+								//}
 							}
 							sb = new StringBuilder();
 						}
 
 						break;
-					
+
 					case DIAGNOSTIC_MODE:
 						sb.append(c);
 						if(c=='\n'){
-							
+
 							String s = sb.toString();
 
 							switch(index){
@@ -246,16 +260,16 @@ public class SerialCommunication implements SerialPortEventListener {
 
 						else
 							index++;
-						
+
 						break;
 					default:
-						System.out.println(c);
+						//System.out.println(c);
 						break;
 					}
 				}
 			}
 		}catch(Exception e){
-			System.out.println("Error getting data");
+			new msgDialog("Error getting data");
 		}
 	}
 
