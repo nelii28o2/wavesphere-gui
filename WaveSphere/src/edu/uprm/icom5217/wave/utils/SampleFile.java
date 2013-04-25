@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import edu.uprm.icom5217.wave.view.MainWindow;
+
 public class SampleFile {
 
 	private File file;

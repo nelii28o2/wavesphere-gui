@@ -3,6 +3,7 @@ package edu.uprm.icom5217.wave.xbee;
 
 import edu.uprm.icom5217.wave.utils.SampleFile;
 import edu.uprm.icom5217.wave.view.LocationModeWindow;
+import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import gnu.io.CommPortIdentifier;
@@ -42,17 +43,13 @@ public class SerialCommunication implements SerialPortEventListener {
 		f = new SampleFile();
 	}	
 
-	public int getFlag() {
-		return flag;
+	public SampleFile getFile(){
+		return f;
 	}
-
-
 
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
-
-
 
 	public  void openSerialPort(String port, int baudRate) throws PortInUseException, UnsupportedCommOperationException, TooManyListenersException, IOException {
 		openSerialPort(port, "XBee", 0, baudRate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE, SerialPort.FLOWCONTROL_NONE);
@@ -164,9 +161,12 @@ public class SerialCommunication implements SerialPortEventListener {
 						//quitar, esta en status
 						break;
 					case XBee.lang.RETRIEVAL_MODE:
+						//parsear datos antes de grabar
 						f.writeToFile(c);
-						if(c == '\n')//or EOF or something
+						if(c == '\n'){//or EOF or something
 							f.flush();
+							MainWindow.retrievalMode();
+						}
 						break;
 					case XBee.lang.SHUTDOWN_MODE:
 						//nothing?

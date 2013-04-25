@@ -64,7 +64,8 @@ public class RightPanel2 extends JPanel {
 			retrievalModeButton = new JButton("Retrieval Mode");
 			retrievalModeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					MainWindow.retrievalMode();
+					WaveSphere.serial.setFlag(XBee.lang.RETRIEVAL_MODE);
+					WaveSphere.serial.write(XBee.lang.RETRIEVAL_MODE);
 				}
 			});
 			retrievalModeButton.setName("retrievalModeButton");
