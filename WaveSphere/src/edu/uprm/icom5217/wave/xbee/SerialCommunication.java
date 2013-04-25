@@ -26,7 +26,7 @@ import java.util.TooManyListenersException;
 public class SerialCommunication implements SerialPortEventListener {
 
 	public Xbee flag;
-	
+
 	private boolean samplingFirstTime = true;
 
 	private  InputStream inputStream;
@@ -54,7 +54,7 @@ public class SerialCommunication implements SerialPortEventListener {
 	public void setFlag(Xbee command) {
 		this.flag = command;
 	}
-	
+
 	public void resetSamplingFlag(){
 		this.samplingFirstTime = true;
 	}
@@ -212,10 +212,12 @@ public class SerialCommunication implements SerialPortEventListener {
 							if(s.contains("$GPRMC")){
 								//if(!s.contains("V")){
 								String[] st = s.split(",");
-								s = (st[3].length()>0? (st[3].substring(0, 2) + "\u00B0 " 
-										+ st[3].substring(2) + "' ") : "xx\u00B0 mm.dddd' ") + st[4] + ", "
-										+ (st[5].length()>0? (st[5].substring(0,3) + "\u00B0 " 
-												+ st[5].substring(3) + "' ") : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
+								s = (s.contains("S")? "-" : "") 
+										+ (st[3].length()>0? (st[3].substring(0, 2) + "." 
+												+ Float.toString(Float.parseFloat(st[3].substring(2))/60)) : "xx\u00B0 mm.dddd' ") + st[4] + ", "
+												+ (s.contains("W")? "-" : "")
+												+ (st[5].length()>0? (st[5].substring(0,3) + "." 
+														+ Float.toString(Float.parseFloat(st[5].substring(3))/60)) : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
 
 								LocatePanel.getInstance().setLabel(s);
 								//}
@@ -309,7 +311,6 @@ public class SerialCommunication implements SerialPortEventListener {
 	}
 
 	public void write(String s) {
-		// TODO Auto-generated method stub
 		outputStream.print(s);
 		//outputStream.print("\r\n"); //needed for AT commands
 		outputStream.flush();

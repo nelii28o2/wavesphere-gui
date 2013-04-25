@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.model.CommPortModel;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
 
 public class ConnectionPane extends JPanel {
 	private static final long serialVersionUID = -8905655347775103530L;
