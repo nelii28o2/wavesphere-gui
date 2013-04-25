@@ -71,6 +71,7 @@ public class ConnectionPane extends JPanel {
 			try {
 				WaveSphere.serial.openSerialPort(
 						 comboBox.getSelectedItem().toString(), 9600);
+				MainWindow.normalMode();
 			} catch (Exception e1) {
 				JOptionPane//TODO error messages per exception type
 						.showMessageDialog(
