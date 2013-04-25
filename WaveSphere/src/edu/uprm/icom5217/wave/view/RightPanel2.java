@@ -22,7 +22,7 @@ public class RightPanel2 extends JPanel {
 	private JButton turnOffButton;
 	
 	public static RightPanel2 instance;
-	private JPanel panel;
+	private SphereInfoPanel panel;
 	
 	public static RightPanel2 getInstance(){
 		if(instance == null)
@@ -98,19 +98,19 @@ public class RightPanel2 extends JPanel {
 
 
 	public void setBolaIdLabel(String s) {
-//		bolaIdLabel.setText(s);
+		getPanel().setIdValue(s);
 	}
 
 
 	public void setLevelLabel(String s) {
-//		levelLabel.setText(s);
+		getPanel().setBatteryLevelValue(s);
 	}
 	
 	public void setMbLabel(String s){
-		
+		getPanel().setMemoryValue(s);
 	}
 	
-	private JPanel getPanel() {
+	private SphereInfoPanel getPanel() {
 		if (panel == null) {
 			panel = new SphereInfoPanel();
 		}
