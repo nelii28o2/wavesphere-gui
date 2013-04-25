@@ -47,8 +47,11 @@ public class RightPanel2 extends JPanel {
 			retrievalModeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					JFileChooser fc = new JFileChooser();
-					fc.setVisible(true);
+					fc.showSaveDialog(getInstance());
+					//TODO handle the rest.. when the user chooses a file ..etc
 					
+					
+					//TODO file choosing and serial comm should be two different listeners
 					WaveSphere.serial.setFlag(XBee.lang.RETRIEVAL_MODE);
 					WaveSphere.serial.write(XBee.lang.RETRIEVAL_MODE);
 				}
