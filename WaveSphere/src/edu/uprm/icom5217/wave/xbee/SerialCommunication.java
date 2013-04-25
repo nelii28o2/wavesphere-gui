@@ -157,38 +157,7 @@ public class SerialCommunication implements SerialPortEventListener {
 					//serialWindow.printToTextArea(c);
 
 					switch(flag){
-					case XBee.lang.ID:
-						//quitar, esta en status
-						break;
-					case XBee.lang.RETRIEVAL_MODE:
-						//parsear datos antes de grabar
-						f.writeToFile(c);
-						if(c == '\n'){//or EOF or something
-							f.flush();
-							MainWindow.retrievalMode();
-						}
-						break;
-					case XBee.lang.SHUTDOWN_MODE:
-						//nothing?
-						break;
-					case XBee.lang.SAMPLING_MODE:
-						sb.append(c);
-						if(c=='\n'){
-							String s = sb.toString();
-							if(s.contains("$GPRMC")){
-								//if(!s.contains("V")){
-								String[] st = s.split(",");
-								s = (st[3].length()>0? (st[3].substring(0, 2) + "\u00B0 " 
-										+ st[3].substring(2) + "' ") : "xx\u00B0 mm.dddd' ") + st[4] + ", "
-										+ (st[5].length()>0? (st[5].substring(0,3) + "\u00B0 " 
-												+ st[5].substring(3) + "' ") : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
-
-								LocationModeWindow.getInstance().setLabel(s);
-							}
-							sb = new StringBuilder();
-						}
-
-						break;
+					
 					case XBee.lang.STATUS_MODE:
 						sb.append(c);
 						if(c=='\n'){
@@ -214,6 +183,35 @@ public class SerialCommunication implements SerialPortEventListener {
 							index++;
 
 						break;
+					
+					case XBee.lang.RETRIEVAL_MODE:
+						//parsear datos antes de grabar
+						f.writeToFile(c);
+						if(c == '\n'){//or EOF or something
+							f.flush();
+							MainWindow.retrievalMode();
+						}
+						break;
+					
+					case XBee.lang.SAMPLING_MODE:
+						sb.append(c);
+						if(c=='\n'){
+							String s = sb.toString();
+							if(s.contains("$GPRMC")){
+								//if(!s.contains("V")){
+								String[] st = s.split(",");
+								s = (st[3].length()>0? (st[3].substring(0, 2) + "\u00B0 " 
+										+ st[3].substring(2) + "' ") : "xx\u00B0 mm.dddd' ") + st[4] + ", "
+										+ (st[5].length()>0? (st[5].substring(0,3) + "\u00B0 " 
+												+ st[5].substring(3) + "' ") : "yyy\u00B0 mm.ddd' ") + st[6] + "\n";
+
+								LocationModeWindow.getInstance().setLabel(s);
+							}
+							sb = new StringBuilder();
+						}
+
+						break;
+					
 					case XBee.lang.DIAGNOSTIC_MODE:
 						sb.append(c);
 						if(c=='\n'){

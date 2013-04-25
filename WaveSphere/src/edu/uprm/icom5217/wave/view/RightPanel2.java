@@ -95,6 +95,7 @@ public class RightPanel2 extends JPanel {
 			turnOffButton = new JButton("Shutdown Mode");
 			turnOffButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					WaveSphere.serial.setFlag(XBee.lang.STATUS_MODE);
 					MainWindow.connectMode();
 				}
 			});
