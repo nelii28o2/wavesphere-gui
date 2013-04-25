@@ -1,13 +1,10 @@
 package edu.uprm.icom5217.wave.view;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,6 +13,7 @@ import net.miginfocom.swing.MigLayout;
 public class SphereInfoPanel extends JPanel {
 	
 	private static final long serialVersionUID = -1992120414454971282L;
+	
 	private JLabel IdNumberLabel;
 	private JLabel ldNumberValueLabel;
 	private JLabel lastLocationLabel;
@@ -25,25 +23,21 @@ public class SphereInfoPanel extends JPanel {
 	private JLabel spaceAvailableValueLabel;
 	private JLabel batteryLevelLabel;
 	private JLabel batteryLevelValueLabel;
-	private JButton downloadAllSamplesButton;
-	private JComboBox<String> comboBox;
+	private JComboBox<String> samplesComboBox;
 	
 	public SphereInfoPanel() {
-		setLayout(new MigLayout("fill", "[212.00,grow,leading]15[96.00]15[grow]", "[]10[]10[]10[]10[]10[23.00]10[]"));
-		add(getIdNumberLabel(), "cell 0 0,alignx right");
-		add(getLdNumberValueLabel(), "cell 2 0");
-		add(getLastLocationLabel(), "cell 0 1,alignx right");
-		add(getLastLocationValueLabel(), "cell 2 1");
-		add(getSpaceAvailableLable(), "cell 0 2,alignx right");
-		add(getSpaceAvailableValueLabel(), "cell 2 2");
-		add(getBatteryLevelLabel(), "cell 0 3,alignx right");
-		add(getBatteryLevelValueLabel(), "cell 2 3");
-		add(getSamplesLable(), "cell 0 4,alignx right");
-		add(getComboBox_1(), "cell 2 4");
-		add(getDownloadAllSamplesButton(), "flowx,cell 1 6");
+		setLayout(new MigLayout("", "[grow][212.00,leading][grow]", "[]10[]10[]10[]10[]"));//TODO fix alignment
+		add(getIdNumberLabel(), "flowx,cell 0 0");
+		add(getLastLocationLabel(), "flowx,cell 0 1");
+		add(getSpaceAvailableLable(), "flowx,cell 0 2");
+		add(getBatteryLevelLabel(), "flowx,cell 0 3");
+		add(getSamplesLable(), "flowx,cell 0 4");
+		add(getLdNumberValueLabel(), "cell 0 0");
+		add(getLastLocationValueLabel(), "cell 0 1");
+		add(getSpaceAvailableValueLabel(), "cell 0 2");
+		add(getBatteryLevelValueLabel(), "cell 0 3");
+		add(getComboBox_1(), "cell 0 4");
 	}
-
-	
 
 	private JLabel getIdNumberLabel() {
 		if (IdNumberLabel == null) {
@@ -53,6 +47,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return IdNumberLabel;
 	}
+	
 	private JLabel getLdNumberValueLabel() {
 		if (ldNumberValueLabel == null) {
 			ldNumberValueLabel = new JLabel("097434134");
@@ -61,6 +56,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return ldNumberValueLabel;
 	}
+	
 	private JLabel getLastLocationLabel() {
 		if (lastLocationLabel == null) {
 			lastLocationLabel = new JLabel("Last Location:");
@@ -69,6 +65,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return lastLocationLabel;
 	}
+	
 	private JLabel getLastLocationValueLabel() {
 		if (lastLocationValueLabel == null) {
 			lastLocationValueLabel = new JLabel("5\u00B0 20' 36.2394\", 5\u00B0 20' 43.8\"");
@@ -76,6 +73,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return lastLocationValueLabel;
 	}
+	
 	private JLabel getSamplesLable() {
 		if (samplesLable == null) {
 			samplesLable = new JLabel("Sample:");
@@ -93,6 +91,7 @@ public class SphereInfoPanel extends JPanel {
 		
 		return spaceAvailableLabel;
 	}
+	
 	private JLabel getSpaceAvailableValueLabel() {
 		if (spaceAvailableValueLabel == null) {
 			spaceAvailableValueLabel = new JLabel("40MB (10%)");
@@ -100,6 +99,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return spaceAvailableValueLabel;
 	}
+	
 	private JLabel getBatteryLevelLabel() {
 		if (batteryLevelLabel == null) {
 			batteryLevelLabel = new JLabel("Battery Level:");
@@ -108,6 +108,7 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return batteryLevelLabel;
 	}
+	
 	private JLabel getBatteryLevelValueLabel() {
 		if (batteryLevelValueLabel == null) {
 			batteryLevelValueLabel = new JLabel("20%");
@@ -115,26 +116,33 @@ public class SphereInfoPanel extends JPanel {
 		}
 		return batteryLevelValueLabel;
 	}
-	private JButton getDownloadAllSamplesButton() {
-		if (downloadAllSamplesButton == null) {
-			downloadAllSamplesButton = new JButton("Download Samples");
-			downloadAllSamplesButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					JFileChooser fc = new JFileChooser();
-					fc.showSaveDialog(MainWindow.getInstance());
-				
-				}
-			});
-			downloadAllSamplesButton.setName("downloadAllSamplesButton");
-		}
-		return downloadAllSamplesButton;
-	}
+	
 	private JComboBox<String> getComboBox_1() {
-		if (comboBox == null) {
-			comboBox = new JComboBox<String>();
-			comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
-			comboBox.setName("comboBox");
+		if (samplesComboBox == null) {
+			samplesComboBox = new JComboBox<String>();
+			samplesComboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"1", "2", "3", "4", "5", "6", "7"}));
+			samplesComboBox.setName("samplesComboBox");
 		}
-		return comboBox;
+		return samplesComboBox;
+	}
+	
+	public void setIdValue(String value){
+		getIdNumberLabel().setText(value);
+	}
+	
+	public void setLocationValue(String value){
+		getLastLocationValueLabel().setText(value);
+	}
+	
+	public void setMemoryValue(String value){
+		getSpaceAvailableValueLabel().setText(value);
+	}
+	
+	public void setBatteryLevelValue(String value){
+		getBatteryLevelValueLabel().setText(value);
+	}
+	
+	public void setSamples(ComboBoxModel<String> model){
+		getComboBox_1().setModel(model);
 	}
 }
