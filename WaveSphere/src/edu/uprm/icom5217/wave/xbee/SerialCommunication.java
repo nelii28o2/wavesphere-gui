@@ -23,7 +23,7 @@ import java.util.TooManyListenersException;
 
 public class SerialCommunication implements SerialPortEventListener {
 
-	public int flag;
+	public Xbee flag;
 
 	private  InputStream inputStream;
 	private  PrintStream outputStream;
@@ -38,7 +38,7 @@ public class SerialCommunication implements SerialPortEventListener {
 
 	public SerialCommunication() throws IOException{
 		sb = new StringBuilder();
-		flag = XBee.lang.STATUS_MODE;
+		flag = Xbee.STATUS_MODE;
 		index = 0;
 		f = new SampleFile();
 	}	
@@ -47,8 +47,8 @@ public class SerialCommunication implements SerialPortEventListener {
 		return f;
 	}
 
-	public void setFlag(int flag) {
-		this.flag = flag;
+	public void setFlag(Xbee command) {
+		this.flag = command;
 	}
 
 	public  void openSerialPort(String port, int baudRate) throws PortInUseException, UnsupportedCommOperationException, TooManyListenersException, IOException {
@@ -157,8 +157,7 @@ public class SerialCommunication implements SerialPortEventListener {
 					//serialWindow.printToTextArea(c);
 
 					switch(flag){
-					
-					case XBee.lang.STATUS_MODE:
+					case STATUS_MODE:
 						sb.append(c);
 						if(c=='\n'){
 							
@@ -184,7 +183,7 @@ public class SerialCommunication implements SerialPortEventListener {
 
 						break;
 					
-					case XBee.lang.RETRIEVAL_MODE:
+					case RETRIEVAL_MODE:
 						//parsear datos antes de grabar
 						f.writeToFile(c);
 						if(c == '\n'){//or EOF or something
@@ -193,7 +192,7 @@ public class SerialCommunication implements SerialPortEventListener {
 						}
 						break;
 					
-					case XBee.lang.SAMPLING_MODE:
+					case SAMPLING_MODE:
 						sb.append(c);
 						if(c=='\n'){
 							String s = sb.toString();
@@ -212,7 +211,7 @@ public class SerialCommunication implements SerialPortEventListener {
 
 						break;
 					
-					case XBee.lang.DIAGNOSTIC_MODE:
+					case DIAGNOSTIC_MODE:
 						sb.append(c);
 						if(c=='\n'){
 							
@@ -283,8 +282,8 @@ public class SerialCommunication implements SerialPortEventListener {
 		return serialPorts;
 	}
 
-	public void write(String data){
-		outputStream.print(data);
+	public void write(Xbee command){
+		outputStream.print(command.getCommand());
 		//outputStream.print("\r\n"); //needed for AT commands
 		outputStream.flush();
 	}
@@ -293,6 +292,13 @@ public class SerialCommunication implements SerialPortEventListener {
 		outputStream.write(data);
 		outputStream.flush();
 
+	}
+
+	public void write(String s) {
+		// TODO Auto-generated method stub
+		outputStream.print(s);
+		//outputStream.print("\r\n"); //needed for AT commands
+		outputStream.flush();
 	}
 
 }

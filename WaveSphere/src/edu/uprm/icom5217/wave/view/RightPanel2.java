@@ -6,13 +6,12 @@ import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
-import edu.uprm.icom5217.wave.xbee.XBee;
+import edu.uprm.icom5217.wave.xbee.Xbee;
 
 public class RightPanel2 extends JPanel {
 	
@@ -52,8 +51,8 @@ public class RightPanel2 extends JPanel {
 					
 					
 					//TODO file choosing and serial comm should be two different listeners
-					WaveSphere.serial.setFlag(XBee.lang.RETRIEVAL_MODE);
-					WaveSphere.serial.write(XBee.lang.RETRIEVAL_MODE);
+					WaveSphere.serial.setFlag(Xbee.RETRIEVAL_MODE);
+					WaveSphere.serial.write(Xbee.RETRIEVAL_MODE);
 				}
 			});
 			retrievalModeButton.setName("retrievalModeButton");
@@ -65,8 +64,8 @@ public class RightPanel2 extends JPanel {
 			diagnosticButton = new JButton("Diagnostic Mode");
 			diagnosticButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					WaveSphere.serial.write(XBee.lang.DIAGNOSTIC_MODE);
-					WaveSphere.serial.setFlag(XBee.lang.DIAGNOSTIC_MODE);
+					WaveSphere.serial.write(Xbee.DIAGNOSTIC_MODE);
+					WaveSphere.serial.setFlag(Xbee.DIAGNOSTIC_MODE);
 					DiagnosticWindow.display("");
 				}
 			});
@@ -79,8 +78,8 @@ public class RightPanel2 extends JPanel {
 			samplingModeButton = new JButton("Sampling Mode");
 			samplingModeButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					WaveSphere.serial.write(XBee.lang.SAMPLING_MODE);
-					WaveSphere.serial.setFlag(XBee.lang.SAMPLING_MODE);
+					WaveSphere.serial.write(Xbee.SAMPLING_MODE);
+					WaveSphere.serial.setFlag(Xbee.SAMPLING_MODE);
 					Calendar c = Calendar.getInstance();
 					WaveSphere.serial.write(Long.toString(c.getTimeInMillis()));
 					MainWindow.samplingMode();
@@ -95,7 +94,7 @@ public class RightPanel2 extends JPanel {
 			turnOffButton = new JButton("Shutdown Mode");
 			turnOffButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					WaveSphere.serial.setFlag(XBee.lang.STATUS_MODE);
+					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
 					MainWindow.connectMode();
 				}
 			});

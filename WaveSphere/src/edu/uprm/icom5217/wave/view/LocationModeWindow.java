@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
-import edu.uprm.icom5217.wave.xbee.XBee;
+import edu.uprm.icom5217.wave.xbee.Xbee;
 
 public class LocationModeWindow extends JDialog{
 	private static final long serialVersionUID = -7898091034199268682L;
@@ -58,8 +58,8 @@ public class LocationModeWindow extends JDialog{
 			newButtonButton = new JButton("Exit");
 			newButtonButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					WaveSphere.serial.write(XBee.lang.STOP_LOCATE_MODE);
-					WaveSphere.serial.setFlag(XBee.lang.STATUS_MODE);
+					WaveSphere.serial.write(Xbee.STOP_LOCATE_MODE);
+					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
 					dispose();
 				}
 			});
