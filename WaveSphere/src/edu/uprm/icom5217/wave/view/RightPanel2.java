@@ -111,7 +111,8 @@ public class RightPanel2 extends JPanel {
 			turnOffButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
-					MainWindow.connectMode();
+//					MainWindow.connectMode();
+					//TODO something in window
 				}
 			});
 			turnOffButton.setName("turnOffButton");

@@ -84,8 +84,10 @@ public class MainWindow extends JFrame{
 	}
 	 
 	public static void connectMode(){
+		isConnected = false;
 		getInstance().getContentPane().removeAll();
 		getInstance().getContentPane().add(new ConnectionPane());
+		getInstance().pack();
 		getInstance().revalidate();
 		getInstance().repaint();
 	}
