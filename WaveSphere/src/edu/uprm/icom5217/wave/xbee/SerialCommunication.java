@@ -7,7 +7,6 @@ import edu.uprm.icom5217.wave.utils.SensorDataConversion;
 import edu.uprm.icom5217.wave.view.LocatePanel;
 import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
-import edu.uprm.icom5217.wave.view.SamplingWaitScreen;
 import edu.uprm.icom5217.wave.view.msgDialog;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import gnu.io.CommPortIdentifier;

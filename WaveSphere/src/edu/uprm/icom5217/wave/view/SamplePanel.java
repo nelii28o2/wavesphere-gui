@@ -3,7 +3,6 @@ package edu.uprm.icom5217.wave.view;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -18,7 +17,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
-import edu.uprm.icom5217.wave.WaveSphere;
 
 public class SamplePanel extends JPanel{
 	public SamplePanel() {
