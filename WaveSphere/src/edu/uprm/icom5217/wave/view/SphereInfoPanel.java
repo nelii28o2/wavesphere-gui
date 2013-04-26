@@ -13,8 +13,6 @@ public class SphereInfoPanel extends JPanel {
 	
 	private JLabel IdNumberLabel;
 	private JLabel ldNumberValueLabel;
-	private JLabel lastLocationLabel;
-	private JLabel lastLocationValueLabel;
 	private JLabel spaceAvailableLabel;
 	private JLabel spaceAvailableValueLabel;
 	private JLabel batteryLevelLabel;
@@ -23,13 +21,11 @@ public class SphereInfoPanel extends JPanel {
 	public SphereInfoPanel() {
 		setLayout(new MigLayout("", "[grow][][grow]", "[]10[]10[]10[]"));
 		add(getIdNumberLabel(), "flowx,cell 1 0");
-		add(getLastLocationLabel(), "flowx,cell 1 1");
-		add(getSpaceAvailableLable(), "flowx,cell 1 2");
-		add(getBatteryLevelLabel(), "flowx,cell 1 3");
-		add(getLdNumberValueLabel(), "cell 1 0");
-		add(getLastLocationValueLabel(), "cell 1 1");
-		add(getSpaceAvailableValueLabel(), "cell 1 2");
+		add(getSpaceAvailableLable(), "cell 1 1");
+		add(getIdNumberValueLabel(), "cell 1 0");
+		add(getSpaceAvailableValueLabel(), "flowx,cell 1 2");
 		add(getBatteryLevelValueLabel(), "cell 1 3");
+		add(getBatteryLevelLabel(), "cell 1 2");
 	}
 
 	private JLabel getIdNumberLabel() {
@@ -41,30 +37,13 @@ public class SphereInfoPanel extends JPanel {
 		return IdNumberLabel;
 	}
 	
-	private JLabel getLdNumberValueLabel() {
+	private JLabel getIdNumberValueLabel() {
 		if (ldNumberValueLabel == null) {
-			ldNumberValueLabel = new JLabel("097434134");
+			ldNumberValueLabel = new JLabel("");
 			ldNumberValueLabel.setFont(new Font("Tahoma", Font.ITALIC, 11));
-			ldNumberValueLabel.setName("ldNumberValueLabel");
+			ldNumberValueLabel.setName("IdNumberValueLabel");
 		}
 		return ldNumberValueLabel;
-	}
-	
-	private JLabel getLastLocationLabel() {
-		if (lastLocationLabel == null) {
-			lastLocationLabel = new JLabel("Last Location:");
-			lastLocationLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-			lastLocationLabel.setName("lastLocationLabel");
-		}
-		return lastLocationLabel;
-	}
-	
-	private JLabel getLastLocationValueLabel() {
-		if (lastLocationValueLabel == null) {
-			lastLocationValueLabel = new JLabel("5\u00B0 20' 36.2394\", 5\u00B0 20' 43.8\"");
-			lastLocationValueLabel.setName("lastLocationValueLabel");
-		}
-		return lastLocationValueLabel;
 	}
 	
 	private JLabel getSpaceAvailableLable(){
@@ -78,7 +57,7 @@ public class SphereInfoPanel extends JPanel {
 	
 	private JLabel getSpaceAvailableValueLabel() {
 		if (spaceAvailableValueLabel == null) {
-			spaceAvailableValueLabel = new JLabel("40MB (10%)");
+			spaceAvailableValueLabel = new JLabel("");
 			spaceAvailableValueLabel.setName("spaceAvailableValueLabel");
 		}
 		return spaceAvailableValueLabel;
@@ -95,18 +74,14 @@ public class SphereInfoPanel extends JPanel {
 	
 	private JLabel getBatteryLevelValueLabel() {
 		if (batteryLevelValueLabel == null) {
-			batteryLevelValueLabel = new JLabel("20%");
+			batteryLevelValueLabel = new JLabel("");
 			batteryLevelValueLabel.setName("batteryLevelValueLabel");
 		}
 		return batteryLevelValueLabel;
 	}
 	
 	public void setIdValue(String value){
-		getIdNumberLabel().setText(value);
-	}
-	
-	public void setLocationValue(String value){
-		getLastLocationValueLabel().setText(value);
+		getIdNumberValueLabel().setText(value);
 	}
 	
 	public void setMemoryValue(String value){

@@ -1,7 +1,9 @@
 package edu.uprm.icom5217.wave.xbee;
 
 
+import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.utils.SampleFile;
+import edu.uprm.icom5217.wave.utils.SensorDataConversion;
 import edu.uprm.icom5217.wave.view.LocatePanel;
 import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
@@ -24,6 +26,8 @@ import java.util.TooManyListenersException;
 
 
 public class SerialCommunication implements SerialPortEventListener {
+	
+	private char EOF = '\n';
 
 	public Xbee flag;
 
@@ -191,17 +195,48 @@ public class SerialCommunication implements SerialPortEventListener {
 						break;
 
 					case RETRIEVAL_MODE:
-						//parsear datos antes de grabar
-						f.writeToFile(c);
-						if(c == '\n'){//or EOF or something
+						sb.append(c);
+						if(c=='\n'){
+												
+							String s = sb.toString();
+							
+							
+								try {
+									
+								String[] data = s.split("\t");
+								String[] acc = data[0].split(",");
+								String[] gyro = data[1].split(",");
+								String[] mag = data[2].split(",");
+								
+								double[] accData = SensorDataConversion.convertAccData(acc);
+								double[] gyrData = SensorDataConversion.convertGyrData(gyro);
+								double[] magData = SensorDataConversion.convertMagData(mag);
+								
+								for(int j = 0; j < 3; j++) {
+									
+									f.writeToFile("A" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", accData[j]) + " g\t");
+									f.writeToFile("G" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", gyrData[j]) + " dps\t");
+									f.writeToFile("M" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", magData[j]) + " gauss\t");
+									f.writeToFile("\n" + ((j == 2) ? "\n" : ""));
+								}
+								} catch(Exception e) {
+									e.printStackTrace();
+									System.out.println("Error parsing data");
+								}
+								//serialWindow.printToTextArea("" + mag[0] + "\n");
+							}
+							sb = new StringBuilder();
+						
+						
+						if(c == EOF){//or EOF or something
 							f.flush();
-							MainWindow.retrievalMode();
+							WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
+							MainWindow.normalMode();
 						}
 						break;
 
 					case SAMPLING_MODE:
 						if(samplingFirstTime){
-							SamplingWaitScreen.done();
 							MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
 							samplingFirstTime = false;
 						}

@@ -15,12 +15,15 @@ public class SamplingWaitScreen extends JPanel{
 	private static JProgressBar progressBar;
 	private JLabel pleaseWaitLabel;
 	
-	final static Timer t  = new Timer(1000, new ActionListener() {
+	private Timer t = new Timer(1000, new ActionListener() {
 		int count = 0;
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 		   getProgressBar().setValue(++count);
-			
+		   if(count > 30){
+			   MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
+			   done();
+		   }
 		}
 	});
 	
@@ -32,7 +35,7 @@ public class SamplingWaitScreen extends JPanel{
 		
 	}
 	
-	public static void done(){
+	public void done(){
 		t.stop();
 	}
 

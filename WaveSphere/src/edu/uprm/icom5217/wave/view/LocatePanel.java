@@ -29,9 +29,6 @@ public class LocatePanel extends JPanel {
 
 
 	private LocatePanel() {
-		
-		SamplingWaitScreen.done();
-
 		setLayout(new MigLayout("fill", "[36.00,grow,center]", "[147.00,grow]5[]5[]5[][]"));
 		//add(getPanel(), "cell 0 0,grow");
 		add(getTheCurentLocationLabel(), "flowx,cell 0 0");
@@ -60,8 +57,8 @@ public class LocatePanel extends JPanel {
 			newButtonButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					WaveSphere.serial.write(Xbee.STOP_LOCATE_MODE);
-					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
-					WaveSphere.serial.resetSamplingFlag();					
+					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);	
+					WaveSphere.serial.resetSamplingFlag();
 					MainWindow.normalMode();
 				}
 			});

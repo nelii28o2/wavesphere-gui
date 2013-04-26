@@ -14,8 +14,8 @@ public class SampleFile {
 		fw = new FileWriter(file);
 	}
 	
-	public void writeToFile(char c) throws IOException{
-		fw.append(c);
+	public void writeToFile(String s) throws IOException{
+		fw.append(s);
 	}
 	
 	public File getTemp(){
