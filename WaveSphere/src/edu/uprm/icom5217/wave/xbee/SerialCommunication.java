@@ -38,17 +38,16 @@ public class SerialCommunication implements SerialPortEventListener {
 
 	private int index;
 
-	SampleFile f;
+	private SampleFile f;
 
 	public SerialCommunication() throws IOException{
 		sb = new StringBuilder();
 		flag = Xbee.STATUS_MODE;
 		index = 0;
-		f = new SampleFile();
 	}	
 
-	public SampleFile getFile(){
-		return f;
+	public void setFile(SampleFile f){
+		this.f = f;
 	}
 
 	public void setFlag(Xbee command) {

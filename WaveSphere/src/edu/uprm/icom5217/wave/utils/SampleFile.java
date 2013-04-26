@@ -9,13 +9,17 @@ public class SampleFile {
 	private File file;
 	private FileWriter fw;
 
-	public SampleFile() throws IOException {
-		file = File.createTempFile("samples", ".txt");
+	public SampleFile(File file) throws IOException {
+		this.file = file;
 		fw = new FileWriter(file);
 	}
 	
 	public void writeToFile(char c) throws IOException{
 		fw.append(c);
+	}
+	
+	public File getTemp(){
+		return file;
 	}
 	
 	public void flush() throws IOException{
