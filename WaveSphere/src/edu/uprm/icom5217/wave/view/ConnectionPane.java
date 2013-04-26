@@ -1,9 +1,11 @@
 package edu.uprm.icom5217.wave.view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,14 +22,27 @@ public class ConnectionPane extends JPanel {
 	private JLabel pleaseSelectALabel;
 	private JComboBox<String> comboBox;
 	private JButton connectButton;
+	private JPanel logoPanel;
 	
 	public ConnectionPane() {
-		setLayout(new MigLayout("", "[c,grow]", "[c][c]"));
+		super();
+		setLayout(new MigLayout("", "[grow,center]", "[47.00,center][32.00,center]20[142.00]20"));
 		add(getPleaseSelectALabel(), "flowx,cell 0 0");
 		add(getComboBox(), "cell 0 0");
 		add(getConnectButton(), "cell 0 1,alignx center");
+		add(getLogoPanel(),"cell 0 2,grow");
 	}
 
+	private JPanel getLogoPanel(){
+		if(logoPanel == null)
+		{
+			logoPanel =  new JPanel(new BorderLayout());
+			JLabel label = new JLabel("", new ImageIcon(ConnectionPane.class.getResource("/img/wavespherelogo.png")), JLabel.CENTER);
+			logoPanel.add( label, BorderLayout.CENTER );
+		}
+		return logoPanel;
+	}
+	
 	private JLabel getPleaseSelectALabel() {
 		if (pleaseSelectALabel == null) {
 			pleaseSelectALabel = new JLabel("Please select a port to connect to this device:");
@@ -55,7 +70,7 @@ public class ConnectionPane extends JPanel {
 		}
 		return connectButton;
 	}
-	
+
 	private class ConnectionController implements ActionListener{
 
 		private final Component container;
@@ -70,6 +85,7 @@ public class ConnectionPane extends JPanel {
 				WaveSphere.serial.openSerialPort(
 						 comboBox.getSelectedItem().toString(), 9600);
 				MainWindow.normalMode();
+				container.setVisible(false);
 			} catch (Exception e1) {
 				JOptionPane//TODO error messages per exception type
 						.showMessageDialog(

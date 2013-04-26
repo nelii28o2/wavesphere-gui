@@ -54,7 +54,7 @@ public class LeftPanel extends JPanel {
 			spheresList = new JList<String>();
 			spheresList.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent arg0) {
-					MainWindow.connectMode();
+					MainWindow.normalMode();
 				}
 			});
 			spheresList.setAlignmentY(Component.TOP_ALIGNMENT);

@@ -1,6 +1,5 @@
 package edu.uprm.icom5217.wave.view;
 
-import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
@@ -8,9 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import edu.uprm.icom5217.wave.WaveSphere;
-
 import net.miginfocom.swing.MigLayout;
+import edu.uprm.icom5217.wave.WaveSphere;
 
 public class MainWindow extends JFrame{
 	
@@ -19,7 +17,7 @@ public class MainWindow extends JFrame{
 	 * The generated serial ID
 	 */
 	private static final long serialVersionUID = 6647353545887103818L;
-	private static final String LOGO_PATH = "/img/wavespherelogo.png";
+	public static final String LOGO_PATH = "/img/wavespherelogo.png";
 	
 	private static MainWindow INSTANCE;
 	private static final RightPanel RETRIEVAL_PANEL = new RightPanel();
@@ -32,13 +30,14 @@ public class MainWindow extends JFrame{
 	}
 	
 	private JSplitPane splitPane;
+	public static volatile boolean isConnected;
 	
 	public MainWindow() {
-		setMinimumSize(new Dimension(500, 400));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindow.class.getResource(LOGO_PATH)));
 		setTitle("Wave Sphere");
 		getContentPane().setLayout(new MigLayout("fill", "[]", "[]"));
-		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
+//		getContentPane().add(getSplitPane(), "cell 0 0,grow,aligny top");
+		getContentPane().add(new ConnectionPane());
 	}
 
 	public JSplitPane getSplitPane() {
@@ -69,13 +68,24 @@ public class MainWindow extends JFrame{
 	}
 	
 	public static void normalMode(){
-		getInstance().getSplitPane().setRightComponent(BOTONES);
+		if(isConnected){
+			getInstance().getSplitPane().setRightComponent(BOTONES);
+		}
+		else{
+			isConnected = true;
+			getInstance().getContentPane().removeAll();
+			getInstance().getContentPane().add(getInstance().getSplitPane(), "cell 0 0,grow,aligny top");
+			getInstance().getSplitPane().setRightComponent(BOTONES);
+			getInstance().pack();
+		}
+		
 		getInstance().revalidate();
 		getInstance().repaint();
 	}
 	 
 	public static void connectMode(){
-		getInstance().getSplitPane().setRightComponent(new ConnectionPane());
+		getInstance().getContentPane().removeAll();
+		getInstance().getContentPane().add(new ConnectionPane());
 		getInstance().revalidate();
 		getInstance().repaint();
 	}
