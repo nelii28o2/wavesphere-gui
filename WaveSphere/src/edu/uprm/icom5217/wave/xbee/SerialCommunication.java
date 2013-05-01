@@ -193,7 +193,6 @@ public class SerialCommunication implements SerialPortEventListener {
 
 			String s = sb.toString();
 
-
 			try {
 
 				String[] data = s.split("\t");
@@ -218,15 +217,6 @@ public class SerialCommunication implements SerialPortEventListener {
 				f.writeToFile((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", magData[0]) + ",")
 						+ (SensorDataConversion.AXIS_LABEL[1] + ": " + String.format("%.3f", magData[1]) + ",")
 						+ (SensorDataConversion.AXIS_LABEL[2] + ": " + String.format("%.3f", magData[2]) + "\n"));
-				
-
-//				for(int j = 0; j < 3; j++) {
-//
-//					f.writeToFile("A" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", accData[j]) + " g\t");
-//					f.writeToFile("G" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", gyrData[j]) + " dps\t");
-//					f.writeToFile("M" + SensorDataConversion.AXIS_LABEL[j] + ": " + String.format("%.3f", magData[j]) + " gauss\t");
-//					f.writeToFile("\n" + ((j == 2) ? "\n" : ""));
-//				}
 			} catch(Exception e) {
 
 			}
@@ -239,6 +229,7 @@ public class SerialCommunication implements SerialPortEventListener {
 			WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
 			MainWindow.normalMode();
 			new msgDialog("File saved.");
+			//TODO ponme esto mas bonito y dsps borra el todo :)
 		}
 	}
 
