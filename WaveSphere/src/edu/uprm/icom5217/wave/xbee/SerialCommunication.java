@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.TooManyListenersException;
 
+import javax.swing.JOptionPane;
+
 
 public class SerialCommunication implements SerialPortEventListener {
 
@@ -228,8 +230,7 @@ public class SerialCommunication implements SerialPortEventListener {
 			f.flush();
 			WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
 			MainWindow.normalMode();
-			new msgDialog("File saved.");
-			//TODO ponme esto mas bonito y dsps borra el todo :)
+			JOptionPane.showMessageDialog(null, "File Saved.");
 		}
 	}
 
