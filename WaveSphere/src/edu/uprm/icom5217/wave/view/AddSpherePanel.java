@@ -22,6 +22,7 @@ public class AddSpherePanel extends JPanel {
 	private JLabel nameLabel;
 	private JTextField nameField;
 	private JButton addButton;
+	private JButton cancelButton;
 
 
 	
@@ -31,7 +32,8 @@ public class AddSpherePanel extends JPanel {
 		add(getIdField(), "cell 0 0, growx");
 		add(getNameLabel(), "flowx,cell 0 1");
 		add(getNameField(), "cell 0 1,growx");
-		add(getAddButton(), "cell 0 2");
+		add(getAddButton(), "flowx,cell 0 2");
+		add(getCancelButton(), "cell 0 2");
 	}
 
 	private JLabel getIdLabel() {
@@ -103,5 +105,17 @@ public class AddSpherePanel extends JPanel {
 				JOptionPane.showMessageDialog(parent, "Invalid Id provided", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+	}
+	private JButton getCancelButton() {
+		if (cancelButton == null) {
+			cancelButton = new JButton("Cancel");
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					MainWindow.normalMode();
+				}
+			});
+			cancelButton.setName("cancelButton");
+		}
+		return cancelButton;
 	}
 }
