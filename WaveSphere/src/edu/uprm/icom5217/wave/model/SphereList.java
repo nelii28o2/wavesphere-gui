@@ -22,7 +22,26 @@ public class SphereList extends DefaultListModel<Sphere> {
 		selectedIndex = i;
 	}
 	
+	public synchronized int getSelectedIndex(){
+		
+		return selectedIndex;
+	}
+	
+	
+	@Override
+	public boolean contains(Object elem) {
+        while(elements().hasMoreElements()){
+        	if(elements().nextElement().getId().equals(elem.toString())){
+        		return true;
+        	}
+        }
+		return super.contains(elem);
+	}
+	
 	public synchronized Sphere getSelected(){
-		return get(selectedIndex);
+		if(selectedIndex != -1){
+			return get(selectedIndex);
+		}
+		else return null;
 	}
 }

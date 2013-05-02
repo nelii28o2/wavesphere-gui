@@ -8,7 +8,7 @@ import edu.uprm.icom5217.wave.utils.SensorDataConversion;
 import edu.uprm.icom5217.wave.view.LocatePanel;
 import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
-import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
+import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticPanel;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
@@ -251,16 +251,16 @@ public class SerialCommunication implements SerialPortEventListener {
 									+ (st[5].length()>0? (st[5].substring(0,3) + "." 
 											+ Float.toString(Float.parseFloat(st[5].substring(3))/60)) : "no GPS signal") + st[6];
 
-					DiagnosticWindow.getInstance().setLocationValueLabel(s);
+					DiagnosticPanel.getInstance().setLocationValueLabel(s);
 					//}
 				}
 			}
 			else if(s.contains("dB"))
-				DiagnosticWindow.getInstance().setWirelssValueLabel(s);
+				DiagnosticPanel.getInstance().setWirelssValueLabel(s);
 			else if(s.contains("%b"))
-				DiagnosticWindow.getInstance().setBatteryValueLabel(s.substring(0,s.length()-2));
+				DiagnosticPanel.getInstance().setBatteryValueLabel(s.substring(0,s.length()-2));
 			else if(s.contains("%m"))
-				DiagnosticWindow.getInstance().setMemoryValueLabel(s.substring(0,s.length()-2));
+				DiagnosticPanel.getInstance().setMemoryValueLabel(s.substring(0,s.length()-2));
 
 			else{
 
@@ -276,16 +276,16 @@ public class SerialCommunication implements SerialPortEventListener {
 					double[] magData = SensorDataConversion.convertMagData(mag);
 
 
-					DiagnosticWindow.getInstance().setAccelerationValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", accData[0]) + " g, ")
+					DiagnosticPanel.getInstance().setAccelerationValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", accData[0]) + " g, ")
 							+ (SensorDataConversion.AXIS_LABEL[1] + ": " + String.format("%.3f", accData[1]) + " g, ")
 							+ (SensorDataConversion.AXIS_LABEL[2] + ": " + String.format("%.3f", accData[2]) + " g"));
 
-					DiagnosticWindow.getInstance().setGyroValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", gyrData[0]) + " dps, ")
+					DiagnosticPanel.getInstance().setGyroValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", gyrData[0]) + " dps, ")
 							+ (SensorDataConversion.AXIS_LABEL[1] + ": " + String.format("%.3f", gyrData[1]) + " dps, ")
 							+ (SensorDataConversion.AXIS_LABEL[2] + ": " + String.format("%.3f", gyrData[2]) + " dps"));
 
 
-					DiagnosticWindow.getInstance().setMagneticValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", magData[0]) + " gauss, ")
+					DiagnosticPanel.getInstance().setMagneticValueLabel((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", magData[0]) + " gauss, ")
 							+ (SensorDataConversion.AXIS_LABEL[1] + ": " + String.format("%.3f", magData[1]) + " gauss, ")
 							+ (SensorDataConversion.AXIS_LABEL[2] + ": " + String.format("%.3f", magData[2]) + " gauss"));
 				} catch(Exception e) {
@@ -369,8 +369,10 @@ public class SerialCommunication implements SerialPortEventListener {
 	}
 
 	public void write(Xbee command){
+		if(!SphereList.getInstance().isEmpty()){
 		outputStream.print(SphereList.getInstance().getSelected().getId() + " " + command.getCommand());
 		outputStream.flush();
+		}
 	}
 
 	public void write(int data){

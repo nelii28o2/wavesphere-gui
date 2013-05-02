@@ -72,22 +72,32 @@ public class MainWindow extends JFrame{
 			getInstance().getSplitPane().setRightComponent(getNormalModeRightPanel());
 			getInstance().pack();
 		}
-		
+		getInstance().doLayout();
 		getInstance().revalidate();
-		getInstance().repaint();
 	}
 	 
 	private static Component getNormalModeRightPanel(){
 		if(SphereList.getInstance().isEmpty()){
 			return new JPanel(){
-				
+
 				private static final long serialVersionUID = 1877127850980758516L;
 
 				{
-				  setLayout(new MigLayout("fill","grow,c","grow,c"));
-				  add(new JLabel("Please add a sphere."));
+					setLayout(new MigLayout("fill","grow,c","grow,c"));
+					add(new JLabel("Please add a sphere."));
 				}
-		     };
+			};
+		}
+		else if(SphereList.getInstance().getSelectedIndex() < 0){
+			return new JPanel(){
+
+				private static final long serialVersionUID = 1877127850980758516L;
+
+				{
+					setLayout(new MigLayout("fill","grow,c","grow,c"));
+					add(new JLabel("Please select a sphere."));
+				}
+			};
 		}
 		
 		return BOTONES;
