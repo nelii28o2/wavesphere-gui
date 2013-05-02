@@ -7,7 +7,6 @@ import edu.uprm.icom5217.wave.utils.SensorDataConversion;
 import edu.uprm.icom5217.wave.view.LocatePanel;
 import edu.uprm.icom5217.wave.view.MainWindow;
 import edu.uprm.icom5217.wave.view.RightPanel2;
-import edu.uprm.icom5217.wave.view.msgDialog;
 import edu.uprm.icom5217.wave.view.diagnostic.DiagnosticWindow;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -226,7 +225,7 @@ public class SerialCommunication implements SerialPortEventListener {
 		}
 
 
-		if(c == EOF){//or EOF or something
+		if(c == EOF){
 			f.flush();
 			WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
 			MainWindow.normalMode();
