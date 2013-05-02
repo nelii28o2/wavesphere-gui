@@ -30,9 +30,15 @@ public class SphereList extends DefaultListModel<Sphere> {
 	
 	@Override
 	public boolean contains(Object elem) {
-		
+		Sphere sphere;
+		if(elem instanceof Sphere)
+		{
+			sphere= (Sphere) elem;
+		}
+		else return false;
+		     
 		for(int i =0; i< getSize(); ++i){
-			if(getElementAt(i).getId().equals(elem.toString()))
+			if(getElementAt(i).getId().equals(sphere.getId()))
 				return true;
 		}
       
