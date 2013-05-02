@@ -27,7 +27,7 @@ public class AddSpherePanel extends JPanel {
 
 	
 	public AddSpherePanel() {
-		setLayout(new MigLayout("", "[grow,center]", "[]10[]10[]"));
+		setLayout(new MigLayout("", "[grow,center, pref!]", "[]10[]10[]"));
 		add(getIdLabel(), "flowx,cell 0 0");
 		add(getIdField(), "cell 0 0, growx");
 		add(getNameLabel(), "flowx,cell 0 1");

@@ -17,6 +17,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import sun.applet.Main;
+
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
 import edu.uprm.icom5217.wave.model.Sphere;
@@ -80,6 +82,9 @@ public class LeftPanel extends JPanel {
 			addSphereButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					MainWindow.setRightPanel(new AddSpherePanel());
+					MainWindow.getInstance().pack();
+					MainWindow.getInstance().pack();
+
 				}
 			});
 		}
