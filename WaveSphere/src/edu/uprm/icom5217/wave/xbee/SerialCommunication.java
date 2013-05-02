@@ -83,7 +83,6 @@ public class SerialCommunication implements SerialPortEventListener {
 
 			if (portId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
 				if (portId.getName().equals(port)) {
-					//log.debug("Using Port: " + portId.getName());
 					found = true;
 					break;
 				}
@@ -91,9 +90,7 @@ public class SerialCommunication implements SerialPortEventListener {
 		}
 
 		if (!found) {
-			//System.out.println("Could not find port: " + port);
 			throw new NullPointerException();
-			//System.exit(1);
 		}
 
 
