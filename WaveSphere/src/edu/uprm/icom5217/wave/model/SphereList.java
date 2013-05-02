@@ -7,6 +7,8 @@ public class SphereList extends DefaultListModel<Sphere> {
 	private static final long serialVersionUID = -7444939952063249674L;
 	private static SphereList INSTANCE = new SphereList();
 	
+	private int selectedIndex = -1;
+	
 	public SphereList(){
 		super();
 	}
@@ -14,5 +16,13 @@ public class SphereList extends DefaultListModel<Sphere> {
 	public static SphereList getInstance()
 	{
 		return INSTANCE;
+	}
+	
+	public synchronized void setSelectedIndex(int i){
+		selectedIndex = i;
+	}
+	
+	public synchronized Sphere getSelected(){
+		return get(selectedIndex);
 	}
 }

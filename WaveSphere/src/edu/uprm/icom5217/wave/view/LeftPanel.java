@@ -60,8 +60,10 @@ public class LeftPanel extends JPanel {
 			spheresList = new JList<Sphere>();
 			spheresList.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent arg0) {
+					SphereList.getInstance().setSelectedIndex(arg0.getFirstIndex());
 					MainWindow.normalMode();
 					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);
+					
 				}
 			});
 			spheresList.setAlignmentY(Component.TOP_ALIGNMENT);
