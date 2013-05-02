@@ -30,12 +30,13 @@ public class SphereList extends DefaultListModel<Sphere> {
 	
 	@Override
 	public boolean contains(Object elem) {
-        while(elements().hasMoreElements()){
-        	if(elements().nextElement().getId().equals(elem.toString())){
-        		return true;
-        	}
-        }
-		return super.contains(elem);
+		
+		for(int i =0; i< getSize(); ++i){
+			if(getElementAt(i).getId().equals(elem.toString()))
+				return true;
+		}
+      
+		return false;
 	}
 	
 	public synchronized Sphere getSelected(){
