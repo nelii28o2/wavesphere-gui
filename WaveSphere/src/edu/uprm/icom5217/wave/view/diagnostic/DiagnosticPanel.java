@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
 import edu.uprm.icom5217.wave.WaveSphere;
@@ -182,124 +181,26 @@ public class DiagnosticPanel extends JPanel {
 	public static void display(String sphereId){
 		getInstance().setVisible(true);
 	}
-	public void setBatteryValueLabel(final String s) {
-		  new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   batteryValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setBatteryValueLabel(String s) {
+		batteryValueLabel.setText(s);
 	}
-	public void setMemoryValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   memoryValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setMemoryValueLabel(String s) {
+		memoryValueLabel.setText(s);
 	}
-	public void setLocationValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   locationValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setLocationValueLabel(String s) {
+		locationValueLabel.setText(s);
 	}
-	public void setWirelssValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   wirelssValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setWirelssValueLabel(String s) {
+		wirelssValueLabel.setText(s);
 	}
-	public void setAccelerationValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   accelerationValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setAccelerationValueLabel(String s) {
+		accelerationValueLabel.setText(s);
 	}
-	public void setGyroValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   gyroValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setGyroValueLabel(String s) {
+		gyroValueLabel.setText(s);
 	}
-	public void setMagneticValueLabel(final String s) {
-		 new Thread(new Runnable()
-		   {
-		       public void run()
-		       {
-		           // When you want to call Label.setText(), do it like this:
-		           SwingUtilities.invokeLater(new Runnable()
-		           {
-		               public void run()
-		               {
-		                   magneticValueLabel.setText(s);
-		               }
-		           });
-
-		       }
-		   }).start();
+	public void setMagneticValueLabel(String s) {
+		magneticValueLabel.setText(s);
 	}
 	
 	
