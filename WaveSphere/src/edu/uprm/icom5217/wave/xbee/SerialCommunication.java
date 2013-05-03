@@ -2,6 +2,7 @@ package edu.uprm.icom5217.wave.xbee;
 
 
 import edu.uprm.icom5217.wave.WaveSphere;
+import edu.uprm.icom5217.wave.model.Sphere;
 import edu.uprm.icom5217.wave.model.SphereList;
 import edu.uprm.icom5217.wave.utils.SampleFile;
 import edu.uprm.icom5217.wave.utils.SensorDataConversion;
@@ -381,6 +382,16 @@ public class SerialCommunication implements SerialPortEventListener {
 	public void write(String s) {
 		outputStream.print(s);
 		outputStream.flush();
+	}
+	
+	public void write(String string, Xbee stopLocateMode){
+		outputStream.print(string + " " + stopLocateMode);
+		outputStream.flush();
+	}
+
+	public void write(Sphere sphere, Xbee stopLocateMode) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

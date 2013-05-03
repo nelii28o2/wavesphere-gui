@@ -88,20 +88,19 @@ public class LocatePanel extends JPanel {
 			NextButton = new JButton("Next");
 			NextButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					if(++currentSphereIndex >= SphereList.getInstance().getSize()) //last sphere
+					WaveSphere.serial.write(SphereList.getInstance().get(currentSphereIndex++).getId(), Xbee.STOP_LOCATE_MODE);
+					if(currentSphereIndex >= SphereList.getInstance().getSize()) //last sphere
 					{
-						WaveSphere.serial.write(Xbee.STOP_LOCATE_MODE);
 						WaveSphere.serial.setFlag(Xbee.STATUS_MODE);	
 						WaveSphere.serial.resetSamplingFlag();
 						MainWindow.normalMode();
 					}
 					else
 					{
+						
 						Sphere nextSphere = SphereList.getInstance().get(currentSphereIndex);
 						//TODO get location of next sphere
-						
-						
-						
+						WaveSphere.serial.write(nextSphere.getId(), Xbee.LOCATE_MODE);
 					}
 				
 				}
