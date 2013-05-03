@@ -53,7 +53,7 @@ public class LocatePanel extends JPanel {
 	
 	private JLabel getLocationLabel() {
 		if (locationLabel == null) {
-			locationLabel = new JLabel("");
+			locationLabel = new JLabel("                   ");
 		}
 		return locationLabel;
 	}
