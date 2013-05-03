@@ -101,49 +101,49 @@ public class DiagnosticPanel extends JPanel {
 		}
 		return magenticLabel;
 	}
-	private JLabel getBatteryValueLabel() {
+	private synchronized JLabel getBatteryValueLabel() {
 		if (batteryValueLabel == null) {
 			batteryValueLabel = new JLabel("");
 			batteryValueLabel.setName("batteryValueLabel");
 		}
 		return batteryValueLabel;
 	}
-	private JLabel getMemoryValueLabel() {
+	private synchronized  JLabel getMemoryValueLabel() {
 		if (memoryValueLabel == null) {
 			memoryValueLabel = new JLabel("");
 			memoryValueLabel.setName("memoryValueLabel");
 		}
 		return memoryValueLabel;
 	}
-	private JLabel getLocationValueLabel() {
+	private synchronized  JLabel getLocationValueLabel() {
 		if (locationValueLabel == null) {
 			locationValueLabel = new JLabel("");
 			locationValueLabel.setName("locationValueLabel");
 		}
 		return locationValueLabel;
 	}
-	private JLabel getWirelssValueLabel() {
+	private  synchronized JLabel getWirelssValueLabel() {
 		if (wirelssValueLabel == null) {
 			wirelssValueLabel = new JLabel("");
 			wirelssValueLabel.setName("wirelssValueLabel");
 		}
 		return wirelssValueLabel;
 	}
-	private JLabel getAccelerationValueLabel() {
+	private synchronized  JLabel getAccelerationValueLabel() {
 		if (accelerationValueLabel == null) {
 			accelerationValueLabel = new JLabel("");
 			accelerationValueLabel.setName("accelerationValueLabel");
 		}
 		return accelerationValueLabel;
 	}
-	private JLabel getGyroValueLabel() {
+	private synchronized  JLabel getGyroValueLabel() {
 		if (gyroValueLabel == null) {
 			gyroValueLabel = new JLabel("");
 			gyroValueLabel.setName("gyroValueLabel");
 		}
 		return gyroValueLabel;
 	}
-	private JLabel getMagneticValueLabel() {
+	private  synchronized JLabel getMagneticValueLabel() {
 		if (magneticValueLabel == null) {
 			magneticValueLabel = new JLabel("");
 			magneticValueLabel.setName("magneticValueLabel");
@@ -192,7 +192,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   batteryValueLabel.setText(s);
+		                   getBatteryValueLabel().setText(s);
 		               }
 		           });
 
@@ -209,7 +209,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   memoryValueLabel.setText(s);
+		                   getMemoryValueLabel().setText(s);
 		               }
 		           });
 
@@ -226,7 +226,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   locationValueLabel.setText(s);
+		                   getLocationValueLabel().setText(s);
 		               }
 		           });
 
@@ -243,7 +243,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   wirelssValueLabel.setText(s);
+		                   getWirelssValueLabel().setText(s);
 		               }
 		           });
 
@@ -260,7 +260,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   accelerationValueLabel.setText(s);
+		                   getAccelerationValueLabel().setText(s);
 		               }
 		           });
 
@@ -277,7 +277,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   gyroValueLabel.setText(s);
+		                   getGyroValueLabel().setText(s);
 		               }
 		           });
 
@@ -294,7 +294,7 @@ public class DiagnosticPanel extends JPanel {
 		           {
 		               public void run()
 		               {
-		                   magneticValueLabel.setText(s);
+		                   getMagneticValueLabel().setText(s);
 		               }
 		           });
 
