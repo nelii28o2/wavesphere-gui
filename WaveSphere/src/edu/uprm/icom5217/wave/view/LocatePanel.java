@@ -75,8 +75,8 @@ public class LocatePanel extends JPanel {
 	}
 
 	public void setLabel(String s){
-		getTheCurentLocationLabel().setText("The current location of " + getCurrentSphere().getName() + "is: ");
 		locationLabel.setText(s);
+		getTheCurentLocationLabel().setText("The current location of " + getCurrentSphere().getName() + "is: ");
 	}
 	
 	public Sphere getCurrentSphere(){

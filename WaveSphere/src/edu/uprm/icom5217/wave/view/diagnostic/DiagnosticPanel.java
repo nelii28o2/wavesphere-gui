@@ -33,7 +33,7 @@ public class DiagnosticPanel extends JPanel {
 	
 	private static DiagnosticPanel INSTANCE;
 	
-	public DiagnosticPanel() {
+	private DiagnosticPanel() {
 		setLayout(new MigLayout("", "[46.00][156.00,grow][118.00][46.00]", "[][][][][][][][][][]"));
 		add(getBatteryLabel(), "cell 1 0");
 		add(getBatteryValueLabel(), "cell 2 0");

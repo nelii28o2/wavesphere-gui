@@ -78,7 +78,7 @@ public class RightPanel2 extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					WaveSphere.serial.write(Xbee.DIAGNOSTIC_MODE);
 					WaveSphere.serial.setFlag(Xbee.DIAGNOSTIC_MODE);
-					MainWindow.setRightPanel(new DiagnosticPanel());
+					MainWindow.setRightPanel(DiagnosticPanel.getInstance());
 				}
 			});
 			diagnosticButton.setName("diagnosticButton");

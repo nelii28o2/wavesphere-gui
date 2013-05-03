@@ -25,7 +25,7 @@ public class SamplingWaitScreen extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 		   getProgressBar().setValue(++count);
 		   if(count > 80){
-			   MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
+			   MainWindow.setRightPanel(LocatePanel.getInstance());
 			   WaveSphere.serial.write(SphereList.getInstance().get(0).getId(), Xbee.STOP_LOCATE_MODE);
 			   done();
 		   }
