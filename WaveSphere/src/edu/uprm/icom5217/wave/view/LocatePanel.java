@@ -63,7 +63,7 @@ public class LocatePanel extends JPanel {
 			cancelButton = new JButton("Cancel");
 			cancelButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					WaveSphere.serial.write(Xbee.STOP_LOCATE_MODE);
+					WaveSphere.serial.write(SphereList.getInstance().get(currentSphereIndex).getId(), Xbee.STOP_LOCATE_MODE);
 					WaveSphere.serial.setFlag(Xbee.STATUS_MODE);	
 					WaveSphere.serial.resetSamplingFlag();
 					MainWindow.normalMode();

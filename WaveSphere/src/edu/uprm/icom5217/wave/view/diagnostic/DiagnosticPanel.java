@@ -207,6 +207,7 @@ public class DiagnosticPanel extends JPanel {
 	}
 	public void setMagneticValueLabel(String s) {
 		magneticValueLabel.setText(s);
+		System.out.println(s);
 		magneticValueLabel.paintImmediately(magneticValueLabel.getVisibleRect());
 	}
 	
