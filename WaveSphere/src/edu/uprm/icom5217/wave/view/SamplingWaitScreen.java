@@ -32,7 +32,7 @@ public class SamplingWaitScreen extends JPanel{
 
 			   MainWindow.setRightPanel(LocatePanel.getInstance());
 
-			   WaveSphere.serial.write(SphereList.getInstance().get(0).getId(), Xbee.STOP_LOCATE_MODE);
+			   WaveSphere.serial.write(SphereList.getInstance().get(0).getId(), Xbee.LOCATE_MODE);
 			   done();
 		   }
 		}
