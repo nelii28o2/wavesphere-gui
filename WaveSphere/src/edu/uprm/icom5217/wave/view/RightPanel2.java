@@ -78,7 +78,7 @@ public class RightPanel2 extends JPanel {
 				public void actionPerformed(ActionEvent arg0) {
 					WaveSphere.serial.write(Xbee.DIAGNOSTIC_MODE);
 					WaveSphere.serial.setFlag(Xbee.DIAGNOSTIC_MODE);
-					MainWindow.setRightPanel(DiagnosticPanel.getInstance());
+					MainWindow.getInstance().getSplitPane().setRightComponent(DiagnosticPanel.getInstance());
 				}
 			});
 			diagnosticButton.setName("diagnosticButton");
@@ -92,8 +92,6 @@ public class RightPanel2 extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					WaveSphere.serial.write(Xbee.SAMPLING_MODE);
 					WaveSphere.serial.setFlag(Xbee.SAMPLING_MODE);
-					Calendar c = Calendar.getInstance();
-					WaveSphere.serial.write(Long.toString(c.getTimeInMillis()));
 					MainWindow.samplingMode();
 				}
 			});

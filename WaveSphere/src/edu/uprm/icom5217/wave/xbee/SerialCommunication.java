@@ -205,7 +205,7 @@ public class SerialCommunication implements SerialPortEventListener {
 				double[] gyrData = SensorDataConversion.convertGyrData(gyro);
 				double[] magData = SensorDataConversion.convertMagData(mag);
 				
-				f.writeToFile(time + ",");
+				f.writeToFile(time + ", ");
 				
 				f.writeToFile((SensorDataConversion.AXIS_LABEL[0] + ": " + String.format("%.3f", accData[0]) + ", ")
 						+ (SensorDataConversion.AXIS_LABEL[1] + ": " + String.format("%.3f", accData[1]) + " , ")
@@ -299,10 +299,6 @@ public class SerialCommunication implements SerialPortEventListener {
 	}
 
 	private void samplingMode(char c) {
-		if(samplingFirstTime){
-			MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
-			samplingFirstTime = false;
-		}
 		sb.append(c);
 		if(c=='\n'){
 			String s = sb.toString();

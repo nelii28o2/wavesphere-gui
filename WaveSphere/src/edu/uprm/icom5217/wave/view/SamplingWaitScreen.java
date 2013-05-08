@@ -25,7 +25,7 @@ public class SamplingWaitScreen extends JPanel{
 		public void actionPerformed(ActionEvent arg0) {
 		   getProgressBar().setValue(++count);
 
-		   if(count > 45){
+		   if(count > 60){
 			   
 			   //check which one works
 			   //MainWindow.getInstance().getSplitPane().setRightComponent(LocatePanel.getInstance());
@@ -53,7 +53,7 @@ public class SamplingWaitScreen extends JPanel{
 	private static JProgressBar getProgressBar() {
 		if (progressBar == null) {
 			progressBar = new JProgressBar();
-			progressBar.setMaximum(45);
+			progressBar.setMaximum(60);
 			progressBar.setName("progressBar");
 		}
 		return progressBar;
